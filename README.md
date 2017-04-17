@@ -4,15 +4,23 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/95rl618ch5c4h2fa?svg=true)](https://ci.appveyor.com/project/sochix/tlsharp)
 [![NuGet version](https://badge.fury.io/nu/TLSharp.svg)](https://badge.fury.io/nu/TLSharp)
 
-_Unofficial_ Telegram (http://telegram.org) client library implemented in C#. Latest TL scheme supported, thanks to Afshin Arani
+_Unofficial_ Telegram (http://telegram.org) client library implemented in C#. Latest TL scheme supported, thanks to Afshin Arani and sochix.
 
 **Consider donation to speed up development process.** 
 
-Bitcoin wallet: **3K1ocweFgaHnAibJ3n6hX7RNZWFTFcJjUe**
+Bitcoin wallet: **1BbgiEsddbhrfcjabQVv5nBfAvM8j7vEb5**
 
 It's a perfect fit for any developer who would like to send data directly to Telegram users or write own custom Telegram client.
 
-:star2: If you :heart: library, please star it! :star2:
+# Whta's new?
+
+* `TLGenerator` now supports `*.tl` files so you can use the latest API level used by telegram desktop.
+* `TLGenerator` templates has been changed. they now have a property called `Type` to determine real derived class type for abstract classes.
+* Abstract classes now has methods starting with `To...` to convert abstract object implicitly to derived class.
+
+# Latest API version
+please download the latest schema from [This Link](https://github.com/telegramdesktop/tdesktop/blob/7b7b9db20bcdf6c8d9e81d8d77f4af3bd50961cd/Telegram/Resources/scheme.tl) (Iranian users need to use proxy to download the Raw version from [This Link](https://github.com/telegramdesktop/tdesktop/raw/7b7b9db20bcdf6c8d9e81d8d77f4af3bd50961cd/Telegram/Resources/scheme.tl)).
+
 
 # Table of contents?
 
