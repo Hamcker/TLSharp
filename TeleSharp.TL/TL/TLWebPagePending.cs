@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-981018084)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             id = br.ReadInt64();
 date = br.ReadInt32();
-
+Type = TLAbsWebPageTypes.TLWebPagePending;
         }
 
         public override void SerializeBody(BinaryWriter bw)

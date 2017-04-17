@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-652419756)]
@@ -67,7 +69,7 @@ migrated_to = (TLAbsInputChannel)ObjectUtils.DeserializeObject(br);
 else
 migrated_to = null;
 
-
+Type = TLAbsChatTypes.TLChat;
         }
 
         public override void SerializeBody(BinaryWriter bw)

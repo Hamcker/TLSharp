@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(1430961007)]
-    public class TLPrivacyRules : TLObject
+    public class TLPrivacyRules : TLAbsPrivacyRules
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Account
         {
             rules = (TLVector<TLAbsPrivacyRule>)ObjectUtils.DeserializeVector<TLAbsPrivacyRule>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsPrivacyRulesTypes.TLPrivacyRules;
         }
 
         public override void SerializeBody(BinaryWriter bw)

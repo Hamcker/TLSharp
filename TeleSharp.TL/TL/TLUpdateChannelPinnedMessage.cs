@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1738988427)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             channel_id = br.ReadInt32();
 id = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateChannelPinnedMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(-661144474)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Auth
             }
         }
 
-                public Auth.TLPasswordRecovery Response{ get; set;}
+                public Auth.TLAbsPasswordRecovery Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -38,7 +41,7 @@ namespace TeleSharp.TL.Auth
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Auth.TLPasswordRecovery)ObjectUtils.DeserializeObject(br);
+			Response = (Auth.TLAbsPasswordRecovery)ObjectUtils.DeserializeObject(br);
 
 		}
     }

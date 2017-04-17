@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1063525281)]
@@ -27,7 +29,7 @@ namespace TeleSharp.TL
      public int id {get;set;}
      public int? from_id {get;set;}
      public TLAbsPeer to_id {get;set;}
-     public TLMessageFwdHeader fwd_from {get;set;}
+     public TLAbsMessageFwdHeader fwd_from {get;set;}
      public int? via_bot_id {get;set;}
      public int? reply_to_msg_id {get;set;}
      public int date {get;set;}
@@ -75,7 +77,7 @@ from_id = null;
 
 to_id = (TLAbsPeer)ObjectUtils.DeserializeObject(br);
 if ((flags & 4) != 0)
-fwd_from = (TLMessageFwdHeader)ObjectUtils.DeserializeObject(br);
+fwd_from = (TLAbsMessageFwdHeader)ObjectUtils.DeserializeObject(br);
 else
 fwd_from = null;
 
@@ -116,7 +118,7 @@ edit_date = br.ReadInt32();
 else
 edit_date = null;
 
-
+Type = TLAbsMessageTypes.TLMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

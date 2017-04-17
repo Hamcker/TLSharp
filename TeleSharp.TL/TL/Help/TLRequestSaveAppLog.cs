@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(1862465352)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Help
             }
         }
 
-                public TLVector<TLInputAppEvent> events {get;set;}
+                public TLVector<TLAbsInputAppEvent> events {get;set;}
         public bool Response{ get; set;}
 
 
@@ -29,7 +32,7 @@ namespace TeleSharp.TL.Help
 
         public override void DeserializeBody(BinaryReader br)
         {
-            events = (TLVector<TLInputAppEvent>)ObjectUtils.DeserializeVector<TLInputAppEvent>(br);
+            events = (TLVector<TLAbsInputAppEvent>)ObjectUtils.DeserializeVector<TLAbsInputAppEvent>(br);
 
         }
 

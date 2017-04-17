@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Updates
 {
 	[TLObject(1567990072)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Updates
         {
             date = br.ReadInt32();
 seq = br.ReadInt32();
-
+Type = TLAbsDifferenceTypes.TLDifferenceEmpty;
         }
 
         public override void SerializeBody(BinaryWriter bw)

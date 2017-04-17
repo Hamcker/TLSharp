@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(949182130)]
-    public class TLInputPeerNotifySettings : TLObject
+    public class TLInputPeerNotifySettings : TLAbsInputPeerNotifySettings
     {
         public override int Constructor
         {
@@ -40,7 +42,7 @@ show_previews = (flags & 1) != 0;
 silent = (flags & 2) != 0;
 mute_until = br.ReadInt32();
 sound = StringUtil.Deserialize(br);
-
+Type = TLAbsInputPeerNotifySettingsTypes.TLInputPeerNotifySettings;
         }
 
         public override void SerializeBody(BinaryWriter bw)

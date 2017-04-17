@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(239663460)]
@@ -23,7 +25,7 @@ namespace TeleSharp.TL
      public string query {get;set;}
      public TLAbsGeoPoint geo {get;set;}
      public string id {get;set;}
-     public TLInputBotInlineMessageID msg_id {get;set;}
+     public TLAbsInputBotInlineMessageID msg_id {get;set;}
 
 
 		public void ComputeFlags()
@@ -46,11 +48,11 @@ geo = null;
 
 id = StringUtil.Deserialize(br);
 if ((flags & 2) != 0)
-msg_id = (TLInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
+msg_id = (TLAbsInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
 else
 msg_id = null;
 
-
+Type = TLAbsUpdateTypes.TLUpdateBotInlineSend;
         }
 
         public override void SerializeBody(BinaryWriter bw)

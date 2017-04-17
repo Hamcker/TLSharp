@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(-1878523231)]
@@ -19,7 +21,7 @@ namespace TeleSharp.TL.Contacts
         }
 
              public int count {get;set;}
-     public TLVector<TLContactBlocked> blocked {get;set;}
+     public TLVector<TLAbsContactBlocked> blocked {get;set;}
      public TLVector<TLAbsUser> users {get;set;}
 
 
@@ -31,9 +33,9 @@ namespace TeleSharp.TL.Contacts
         public override void DeserializeBody(BinaryReader br)
         {
             count = br.ReadInt32();
-blocked = (TLVector<TLContactBlocked>)ObjectUtils.DeserializeVector<TLContactBlocked>(br);
+blocked = (TLVector<TLAbsContactBlocked>)ObjectUtils.DeserializeVector<TLAbsContactBlocked>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsBlockedTypes.TLBlockedSlice;
         }
 
         public override void SerializeBody(BinaryWriter bw)

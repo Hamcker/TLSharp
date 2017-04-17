@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1494273227)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             duration = br.ReadInt32();
 w = br.ReadInt32();
 h = br.ReadInt32();
-
+Type = TLAbsDocumentAttributeTypes.TLDocumentAttributeVideo;
         }
 
         public override void SerializeBody(BinaryWriter bw)

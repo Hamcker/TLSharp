@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(90744648)]
@@ -37,7 +39,7 @@ flags = same_peer ? (flags | 1) : (flags & ~1);
 same_peer = (flags & 1) != 0;
 text = StringUtil.Deserialize(br);
 query = StringUtil.Deserialize(br);
-
+Type = TLAbsKeyboardButtonTypes.TLKeyboardButtonSwitchInline;
         }
 
         public override void SerializeBody(BinaryWriter bw)

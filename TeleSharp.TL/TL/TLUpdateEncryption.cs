@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1264392051)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             chat = (TLAbsEncryptedChat)ObjectUtils.DeserializeObject(br);
 date = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateEncryption;
         }
 
         public override void SerializeBody(BinaryWriter bw)

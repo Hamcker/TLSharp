@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-57668565)]
@@ -39,7 +41,7 @@ self_participant = (TLAbsChatParticipant)ObjectUtils.DeserializeObject(br);
 else
 self_participant = null;
 
-
+Type = TLAbsChatParticipantsTypes.TLChatParticipantsForbidden;
         }
 
         public override void SerializeBody(BinaryWriter bw)

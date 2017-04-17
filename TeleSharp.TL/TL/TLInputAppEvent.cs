@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1996904104)]
-    public class TLInputAppEvent : TLObject
+    public class TLInputAppEvent : TLAbsInputAppEvent
     {
         public override int Constructor
         {
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 type = StringUtil.Deserialize(br);
 peer = br.ReadInt64();
 data = StringUtil.Deserialize(br);
-
+Type = TLAbsInputAppEventTypes.TLInputAppEvent;
         }
 
         public override void SerializeBody(BinaryWriter bw)

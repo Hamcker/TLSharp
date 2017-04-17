@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(986597452)]
-    public class TLLink : TLObject
+    public class TLLink : TLAbsLink
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Contacts
             my_link = (TLAbsContactLink)ObjectUtils.DeserializeObject(br);
 foreign_link = (TLAbsContactLink)ObjectUtils.DeserializeObject(br);
 user = (TLAbsUser)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsLinkTypes.TLLink;
         }
 
         public override void SerializeBody(BinaryWriter bw)

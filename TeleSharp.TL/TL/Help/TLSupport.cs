@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(398898678)]
-    public class TLSupport : TLObject
+    public class TLSupport : TLAbsSupport
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Help
         {
             phone_number = StringUtil.Deserialize(br);
 user = (TLAbsUser)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsSupportTypes.TLSupport;
         }
 
         public override void SerializeBody(BinaryWriter bw)

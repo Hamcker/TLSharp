@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(764901049)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Messages
         }
 
                 public TLVector<TLAbsInputPeer> peers {get;set;}
-        public Messages.TLPeerDialogs Response{ get; set;}
+        public Messages.TLAbsPeerDialogs Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Messages
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLPeerDialogs)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsPeerDialogs)ObjectUtils.DeserializeObject(br);
 
 		}
     }

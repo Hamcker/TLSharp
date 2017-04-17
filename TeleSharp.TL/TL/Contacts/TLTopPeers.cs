@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(1891070632)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL.Contacts
             }
         }
 
-             public TLVector<TLTopPeerCategoryPeers> categories {get;set;}
+             public TLVector<TLAbsTopPeerCategoryPeers> categories {get;set;}
      public TLVector<TLAbsChat> chats {get;set;}
      public TLVector<TLAbsUser> users {get;set;}
 
@@ -30,10 +32,10 @@ namespace TeleSharp.TL.Contacts
 
         public override void DeserializeBody(BinaryReader br)
         {
-            categories = (TLVector<TLTopPeerCategoryPeers>)ObjectUtils.DeserializeVector<TLTopPeerCategoryPeers>(br);
+            categories = (TLVector<TLAbsTopPeerCategoryPeers>)ObjectUtils.DeserializeVector<TLAbsTopPeerCategoryPeers>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsTopPeersTypes.TLTopPeers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(377562760)]
@@ -30,7 +32,7 @@ namespace TeleSharp.TL
      public int pts {get;set;}
      public int pts_count {get;set;}
      public int date {get;set;}
-     public TLMessageFwdHeader fwd_from {get;set;}
+     public TLAbsMessageFwdHeader fwd_from {get;set;}
      public int? via_bot_id {get;set;}
      public int? reply_to_msg_id {get;set;}
      public TLVector<TLAbsMessageEntity> entities {get;set;}
@@ -65,7 +67,7 @@ pts = br.ReadInt32();
 pts_count = br.ReadInt32();
 date = br.ReadInt32();
 if ((flags & 4) != 0)
-fwd_from = (TLMessageFwdHeader)ObjectUtils.DeserializeObject(br);
+fwd_from = (TLAbsMessageFwdHeader)ObjectUtils.DeserializeObject(br);
 else
 fwd_from = null;
 
@@ -84,7 +86,7 @@ entities = (TLVector<TLAbsMessageEntity>)ObjectUtils.DeserializeVector<TLAbsMess
 else
 entities = null;
 
-
+Type = TLAbsUpdatesTypes.TLUpdateShortChatMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

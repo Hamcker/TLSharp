@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1690108678)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 parts = br.ReadInt32();
 md5_checksum = StringUtil.Deserialize(br);
 key_fingerprint = br.ReadInt32();
-
+Type = TLAbsInputEncryptedFileTypes.TLInputEncryptedFileUploaded;
         }
 
         public override void SerializeBody(BinaryWriter bw)

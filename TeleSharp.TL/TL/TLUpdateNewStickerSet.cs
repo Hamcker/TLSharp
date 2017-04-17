@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1753886890)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL
             }
         }
 
-             public Messages.TLStickerSet stickerset {get;set;}
+             public Messages.TLAbsStickerSet stickerset {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,8 +30,8 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            stickerset = (Messages.TLStickerSet)ObjectUtils.DeserializeObject(br);
-
+            stickerset = (Messages.TLAbsStickerSet)ObjectUtils.DeserializeObject(br);
+Type = TLAbsUpdateTypes.TLUpdateNewStickerSet;
         }
 
         public override void SerializeBody(BinaryWriter bw)

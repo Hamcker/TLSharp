@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-74070332)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             id = br.ReadInt64();
 access_hash = br.ReadInt64();
-
+Type = TLAbsInputPhotoTypes.TLInputPhoto;
         }
 
         public override void SerializeBody(BinaryWriter bw)

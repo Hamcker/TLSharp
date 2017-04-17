@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(913498268)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Messages
         }
 
                 public TLAbsInputPeer peer {get;set;}
-        public TLPeerSettings Response{ get; set;}
+        public TLAbsPeerSettings Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Messages
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (TLPeerSettings)ObjectUtils.DeserializeObject(br);
+			Response = (TLAbsPeerSettings)ObjectUtils.DeserializeObject(br);
 
 		}
     }

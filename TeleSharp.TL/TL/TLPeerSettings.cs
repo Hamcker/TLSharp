@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-2122045747)]
-    public class TLPeerSettings : TLObject
+    public class TLPeerSettings : TLAbsPeerSettings
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ flags = report_spam ? (flags | 1) : (flags & ~1);
         {
             flags = br.ReadInt32();
 report_spam = (flags & 1) != 0;
-
+Type = TLAbsPeerSettingsTypes.TLPeerSettings;
         }
 
         public override void SerializeBody(BinaryWriter bw)

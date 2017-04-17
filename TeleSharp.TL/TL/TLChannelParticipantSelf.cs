@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1557620115)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             user_id = br.ReadInt32();
 inviter_id = br.ReadInt32();
 date = br.ReadInt32();
-
+Type = TLAbsChannelParticipantTypes.TLChannelParticipantSelf;
         }
 
         public override void SerializeBody(BinaryWriter bw)

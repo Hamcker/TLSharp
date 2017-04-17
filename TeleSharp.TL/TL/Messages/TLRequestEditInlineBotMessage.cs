@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(319564933)]
@@ -20,7 +23,7 @@ namespace TeleSharp.TL.Messages
 
                 public int flags {get;set;}
         public bool no_webpage {get;set;}
-        public TLInputBotInlineMessageID id {get;set;}
+        public TLAbsInputBotInlineMessageID id {get;set;}
         public string message {get;set;}
         public TLAbsReplyMarkup reply_markup {get;set;}
         public TLVector<TLAbsMessageEntity> entities {get;set;}
@@ -41,7 +44,7 @@ flags = entities != null ? (flags | 8) : (flags & ~8);
         {
             flags = br.ReadInt32();
 no_webpage = (flags & 2) != 0;
-id = (TLInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
+id = (TLAbsInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
 if ((flags & 2048) != 0)
 message = StringUtil.Deserialize(br);
 else

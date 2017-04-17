@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1194283041)]
-    public class TLAccountDaysTTL : TLObject
+    public class TLAccountDaysTTL : TLAbsAccountDaysTTL
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL
         public override void DeserializeBody(BinaryReader br)
         {
             days = br.ReadInt32();
-
+Type = TLAbsAccountDaysTTLTypes.TLAccountDaysTTL;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(313694676)]
-    public class TLStickerPack : TLObject
+    public class TLStickerPack : TLAbsStickerPack
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             emoticon = StringUtil.Deserialize(br);
 documents = (TLVector<long>)ObjectUtils.DeserializeVector<long>(br);
-
+Type = TLAbsStickerPackTypes.TLStickerPack;
         }
 
         public override void SerializeBody(BinaryWriter bw)

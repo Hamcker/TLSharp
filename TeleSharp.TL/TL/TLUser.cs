@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-787638374)]
@@ -135,7 +137,7 @@ bot_inline_placeholder = StringUtil.Deserialize(br);
 else
 bot_inline_placeholder = null;
 
-
+Type = TLAbsUserTypes.TLUser;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(-1073693790)]
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Auth
         public override void DeserializeBody(BinaryReader br)
         {
             length = br.ReadInt32();
-
+Type = TLAbsSentCodeTypeTypes.TLSentCodeTypeSms;
         }
 
         public override void SerializeBody(BinaryWriter bw)

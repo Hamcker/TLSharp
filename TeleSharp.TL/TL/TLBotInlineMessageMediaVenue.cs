@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1130767150)]
@@ -47,7 +49,7 @@ reply_markup = (TLAbsReplyMarkup)ObjectUtils.DeserializeObject(br);
 else
 reply_markup = null;
 
-
+Type = TLAbsBotInlineMessageTypes.TLBotInlineMessageMediaVenue;
         }
 
         public override void SerializeBody(BinaryWriter bw)

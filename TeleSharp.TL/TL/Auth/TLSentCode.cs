@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(1577067778)]
-    public class TLSentCode : TLObject
+    public class TLSentCode : TLAbsSentCode
     {
         public override int Constructor
         {
@@ -51,7 +53,7 @@ timeout = br.ReadInt32();
 else
 timeout = null;
 
-
+Type = TLAbsSentCodeTypes.TLSentCode;
         }
 
         public override void SerializeBody(BinaryWriter bw)

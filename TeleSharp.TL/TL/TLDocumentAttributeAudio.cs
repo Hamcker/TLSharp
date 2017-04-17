@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1739392570)]
@@ -56,7 +58,7 @@ waveform = BytesUtil.Deserialize(br);
 else
 waveform = null;
 
-
+Type = TLAbsDocumentAttributeTypes.TLDocumentAttributeAudio;
         }
 
         public override void SerializeBody(BinaryWriter bw)

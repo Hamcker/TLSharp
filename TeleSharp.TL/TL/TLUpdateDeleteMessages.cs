@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1576161051)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             messages = (TLVector<int>)ObjectUtils.DeserializeVector<int>(br);
 pts = br.ReadInt32();
 pts_count = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateDeleteMessages;
         }
 
         public override void SerializeBody(BinaryWriter bw)

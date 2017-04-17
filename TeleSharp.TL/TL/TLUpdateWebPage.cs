@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(2139689491)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             webpage = (TLAbsWebPage)ObjectUtils.DeserializeObject(br);
 pts = br.ReadInt32();
 pts_count = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateWebPage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-94974410)]
@@ -41,7 +43,7 @@ admin_id = br.ReadInt32();
 participant_id = br.ReadInt32();
 g_a_or_b = BytesUtil.Deserialize(br);
 key_fingerprint = br.ReadInt64();
-
+Type = TLAbsEncryptedChatTypes.TLEncryptedChat;
         }
 
         public override void SerializeBody(BinaryWriter bw)

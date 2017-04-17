@@ -1,0 +1,4 @@
+﻿		public /*Type*/ To/*Type*/()
+		{
+			return this as /*Type*/;
+		}

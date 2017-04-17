@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
-	[TLObject(627509670)]
-    public class TLBotResults : TLObject
+	[TLObject(-858565059)]
+    public class TLBotResults : TLAbsBotResults
     {
         public override int Constructor
         {
             get
             {
-                return 627509670;
+                return -858565059;
             }
         }
 
@@ -22,8 +24,9 @@ namespace TeleSharp.TL.Messages
      public bool gallery {get;set;}
      public long query_id {get;set;}
      public string next_offset {get;set;}
-     public TLInlineBotSwitchPM switch_pm {get;set;}
+     public TLAbsInlineBotSwitchPM switch_pm {get;set;}
      public TLVector<TLAbsBotInlineResult> results {get;set;}
+     public int cache_time {get;set;}
 
 
 		public void ComputeFlags()
@@ -46,12 +49,13 @@ else
 next_offset = null;
 
 if ((flags & 4) != 0)
-switch_pm = (TLInlineBotSwitchPM)ObjectUtils.DeserializeObject(br);
+switch_pm = (TLAbsInlineBotSwitchPM)ObjectUtils.DeserializeObject(br);
 else
 switch_pm = null;
 
 results = (TLVector<TLAbsBotInlineResult>)ObjectUtils.DeserializeVector<TLAbsBotInlineResult>(br);
-
+cache_time = br.ReadInt32();
+Type = TLAbsBotResultsTypes.TLBotResults;
         }
 
         public override void SerializeBody(BinaryWriter bw)
@@ -66,6 +70,7 @@ StringUtil.Serialize(next_offset,bw);
 if ((flags & 4) != 0)
 ObjectUtils.SerializeObject(switch_pm,bw);
 ObjectUtils.SerializeObject(results,bw);
+bw.Write(cache_time);
 
         }
     }

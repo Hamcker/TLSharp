@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Updates
 {
 	[TLObject(543450958)]
@@ -50,7 +52,7 @@ new_messages = (TLVector<TLAbsMessage>)ObjectUtils.DeserializeVector<TLAbsMessag
 other_updates = (TLVector<TLAbsUpdate>)ObjectUtils.DeserializeVector<TLAbsUpdate>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsChannelDifferenceTypes.TLChannelDifference;
         }
 
         public override void SerializeBody(BinaryWriter bw)

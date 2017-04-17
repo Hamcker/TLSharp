@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(149257707)]
@@ -22,7 +25,7 @@ namespace TeleSharp.TL.Account
         public bool allow_flashcall {get;set;}
         public string phone_number {get;set;}
         public bool? current_number {get;set;}
-        public Auth.TLSentCode Response{ get; set;}
+        public Auth.TLAbsSentCode Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -59,7 +62,7 @@ BoolUtil.Serialize(current_number.Value,bw);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Auth.TLSentCode)ObjectUtils.DeserializeObject(br);
+			Response = (Auth.TLAbsSentCode)ObjectUtils.DeserializeObject(br);
 
 		}
     }

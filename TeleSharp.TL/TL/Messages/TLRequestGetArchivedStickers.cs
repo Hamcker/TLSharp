@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1475442322)]
@@ -22,7 +25,7 @@ namespace TeleSharp.TL.Messages
         public bool masks {get;set;}
         public long offset_id {get;set;}
         public int limit {get;set;}
-        public Messages.TLArchivedStickers Response{ get; set;}
+        public Messages.TLAbsArchivedStickers Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -53,7 +56,7 @@ bw.Write(limit);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLArchivedStickers)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsArchivedStickers)ObjectUtils.DeserializeObject(br);
 
 		}
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1588737454)]
@@ -97,7 +99,7 @@ restriction_reason = StringUtil.Deserialize(br);
 else
 restriction_reason = null;
 
-
+Type = TLAbsChatTypes.TLChannel;
         }
 
         public override void SerializeBody(BinaryWriter bw)

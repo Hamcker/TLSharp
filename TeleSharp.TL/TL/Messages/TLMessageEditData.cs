@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(649453030)]
-    public class TLMessageEditData : TLObject
+    public class TLMessageEditData : TLAbsMessageEditData
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ flags = caption ? (flags | 1) : (flags & ~1);
         {
             flags = br.ReadInt32();
 caption = (flags & 1) != 0;
-
+Type = TLAbsMessageEditDataTypes.TLMessageEditData;
         }
 
         public override void SerializeBody(BinaryWriter bw)

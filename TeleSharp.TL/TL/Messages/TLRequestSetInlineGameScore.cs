@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(363700068)]
@@ -20,7 +23,8 @@ namespace TeleSharp.TL.Messages
 
                 public int flags {get;set;}
         public bool edit_message {get;set;}
-        public TLInputBotInlineMessageID id {get;set;}
+        public bool force {get;set;}
+        public TLAbsInputBotInlineMessageID id {get;set;}
         public TLAbsInputUser user_id {get;set;}
         public int score {get;set;}
         public bool Response{ get; set;}
@@ -30,6 +34,7 @@ namespace TeleSharp.TL.Messages
 		{
 			flags = 0;
 flags = edit_message ? (flags | 1) : (flags & ~1);
+flags = force ? (flags | 2) : (flags & ~2);
 
 		}
 
@@ -37,7 +42,8 @@ flags = edit_message ? (flags | 1) : (flags & ~1);
         {
             flags = br.ReadInt32();
 edit_message = (flags & 1) != 0;
-id = (TLInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
+force = (flags & 2) != 0;
+id = (TLAbsInputBotInlineMessageID)ObjectUtils.DeserializeObject(br);
 user_id = (TLAbsInputUser)ObjectUtils.DeserializeObject(br);
 score = br.ReadInt32();
 
@@ -48,6 +54,7 @@ score = br.ReadInt32();
 			bw.Write(Constructor);
             ComputeFlags();
 bw.Write(flags);
+
 
 ObjectUtils.SerializeObject(id,bw);
 ObjectUtils.SerializeObject(user_id,bw);

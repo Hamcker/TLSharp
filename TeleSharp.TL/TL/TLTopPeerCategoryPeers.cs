@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-75283823)]
-    public class TLTopPeerCategoryPeers : TLObject
+    public class TLTopPeerCategoryPeers : TLAbsTopPeerCategoryPeers
     {
         public override int Constructor
         {
@@ -20,7 +22,7 @@ namespace TeleSharp.TL
 
              public TLAbsTopPeerCategory category {get;set;}
      public int count {get;set;}
-     public TLVector<TLTopPeer> peers {get;set;}
+     public TLVector<TLAbsTopPeer> peers {get;set;}
 
 
 		public void ComputeFlags()
@@ -32,8 +34,8 @@ namespace TeleSharp.TL
         {
             category = (TLAbsTopPeerCategory)ObjectUtils.DeserializeObject(br);
 count = br.ReadInt32();
-peers = (TLVector<TLTopPeer>)ObjectUtils.DeserializeVector<TLTopPeer>(br);
-
+peers = (TLVector<TLAbsTopPeer>)ObjectUtils.DeserializeVector<TLAbsTopPeer>(br);
+Type = TLAbsTopPeerCategoryPeersTypes.TLTopPeerCategoryPeers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

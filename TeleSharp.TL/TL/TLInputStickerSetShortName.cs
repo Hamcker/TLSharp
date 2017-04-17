@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-2044933984)]
@@ -29,7 +31,7 @@ namespace TeleSharp.TL
         public override void DeserializeBody(BinaryReader br)
         {
             short_name = StringUtil.Deserialize(br);
-
+Type = TLAbsInputStickerSetTypes.TLInputStickerSetShortName;
         }
 
         public override void SerializeBody(BinaryWriter bw)

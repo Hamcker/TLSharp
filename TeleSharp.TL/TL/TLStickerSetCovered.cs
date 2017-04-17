@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1678812626)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL
             }
         }
 
-             public TLStickerSet @set {get;set;}
+             public TLAbsStickerSet @set {get;set;}
      public TLAbsDocument cover {get;set;}
 
 
@@ -29,9 +31,9 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            @set = (TLStickerSet)ObjectUtils.DeserializeObject(br);
+            @set = (TLAbsStickerSet)ObjectUtils.DeserializeObject(br);
 cover = (TLAbsDocument)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsStickerSetCoveredTypes.TLStickerSetCovered;
         }
 
         public override void SerializeBody(BinaryWriter bw)

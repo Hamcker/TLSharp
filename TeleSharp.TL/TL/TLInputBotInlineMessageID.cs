@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1995686519)]
-    public class TLInputBotInlineMessageID : TLObject
+    public class TLInputBotInlineMessageID : TLAbsInputBotInlineMessageID
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             dc_id = br.ReadInt32();
 id = br.ReadInt64();
 access_hash = br.ReadInt64();
-
+Type = TLAbsInputBotInlineMessageIDTypes.TLInputBotInlineMessageID;
         }
 
         public override void SerializeBody(BinaryWriter bw)

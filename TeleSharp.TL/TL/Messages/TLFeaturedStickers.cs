@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-123893531)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Messages
             hash = br.ReadInt32();
 sets = (TLVector<TLAbsStickerSetCovered>)ObjectUtils.DeserializeVector<TLAbsStickerSetCovered>(br);
 unread = (TLVector<long>)ObjectUtils.DeserializeVector<long>(br);
-
+Type = TLAbsFeaturedStickersTypes.TLFeaturedStickers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

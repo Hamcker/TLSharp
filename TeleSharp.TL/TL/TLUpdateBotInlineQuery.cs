@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1417832080)]
@@ -45,7 +47,7 @@ else
 geo = null;
 
 offset = StringUtil.Deserialize(br);
-
+Type = TLAbsUpdateTypes.TLUpdateBotInlineQuery;
         }
 
         public override void SerializeBody(BinaryWriter bw)

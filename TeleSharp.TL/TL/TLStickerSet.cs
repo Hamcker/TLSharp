@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-852477119)]
-    public class TLStickerSet : TLObject
+    public class TLStickerSet : TLAbsStickerSet
     {
         public override int Constructor
         {
@@ -54,7 +56,7 @@ title = StringUtil.Deserialize(br);
 short_name = StringUtil.Deserialize(br);
 count = br.ReadInt32();
 hash = br.ReadInt32();
-
+Type = TLAbsStickerSetTypes.TLStickerSet;
         }
 
         public override void SerializeBody(BinaryWriter bw)

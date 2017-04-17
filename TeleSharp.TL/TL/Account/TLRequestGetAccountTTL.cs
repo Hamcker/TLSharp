@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(150761757)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Account
             }
         }
 
-                public TLAccountDaysTTL Response{ get; set;}
+                public TLAbsAccountDaysTTL Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -38,7 +41,7 @@ namespace TeleSharp.TL.Account
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (TLAccountDaysTTL)ObjectUtils.DeserializeObject(br);
+			Response = (TLAbsAccountDaysTTL)ObjectUtils.DeserializeObject(br);
 
 		}
     }

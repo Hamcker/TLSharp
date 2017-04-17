@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1369215196)]
-    public class TLDisabledFeature : TLObject
+    public class TLDisabledFeature : TLAbsDisabledFeature
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             feature = StringUtil.Deserialize(br);
 description = StringUtil.Deserialize(br);
-
+Type = TLAbsDisabledFeatureTypes.TLDisabledFeature;
         }
 
         public override void SerializeBody(BinaryWriter bw)

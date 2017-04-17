@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1009430225)]
@@ -32,7 +34,7 @@ namespace TeleSharp.TL
      public TLAbsPhoto chat_photo {get;set;}
      public TLAbsPeerNotifySettings notify_settings {get;set;}
      public TLAbsExportedChatInvite exported_invite {get;set;}
-     public TLVector<TLBotInfo> bot_info {get;set;}
+     public TLVector<TLAbsBotInfo> bot_info {get;set;}
      public int? migrated_from_chat_id {get;set;}
      public int? migrated_from_max_id {get;set;}
      public int? pinned_msg_id {get;set;}
@@ -80,7 +82,7 @@ unread_count = br.ReadInt32();
 chat_photo = (TLAbsPhoto)ObjectUtils.DeserializeObject(br);
 notify_settings = (TLAbsPeerNotifySettings)ObjectUtils.DeserializeObject(br);
 exported_invite = (TLAbsExportedChatInvite)ObjectUtils.DeserializeObject(br);
-bot_info = (TLVector<TLBotInfo>)ObjectUtils.DeserializeVector<TLBotInfo>(br);
+bot_info = (TLVector<TLAbsBotInfo>)ObjectUtils.DeserializeVector<TLAbsBotInfo>(br);
 if ((flags & 16) != 0)
 migrated_from_chat_id = br.ReadInt32();
 else
@@ -96,7 +98,7 @@ pinned_msg_id = br.ReadInt32();
 else
 pinned_msg_id = null;
 
-
+Type = TLAbsChatFullTypes.TLChannelFull;
         }
 
         public override void SerializeBody(BinaryWriter bw)

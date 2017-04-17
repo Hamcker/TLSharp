@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1910892683)]
-    public class TLNearestDc : TLObject
+    public class TLNearestDc : TLAbsNearestDc
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             country = StringUtil.Deserialize(br);
 this_dc = br.ReadInt32();
 nearest_dc = br.ReadInt32();
-
+Type = TLAbsNearestDcTypes.TLNearestDc;
         }
 
         public override void SerializeBody(BinaryWriter bw)

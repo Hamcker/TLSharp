@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-200242528)]
@@ -36,7 +38,7 @@ flags = selective ? (flags | 4) : (flags & ~4);
             flags = br.ReadInt32();
 single_use = (flags & 2) != 0;
 selective = (flags & 4) != 0;
-
+Type = TLAbsReplyMarkupTypes.TLReplyKeyboardForceReply;
         }
 
         public override void SerializeBody(BinaryWriter bw)

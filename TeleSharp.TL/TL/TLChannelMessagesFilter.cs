@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-847783593)]
@@ -20,7 +22,7 @@ namespace TeleSharp.TL
 
              public int flags {get;set;}
      public bool exclude_new_messages {get;set;}
-     public TLVector<TLMessageRange> ranges {get;set;}
+     public TLVector<TLAbsMessageRange> ranges {get;set;}
 
 
 		public void ComputeFlags()
@@ -34,8 +36,8 @@ flags = exclude_new_messages ? (flags | 2) : (flags & ~2);
         {
             flags = br.ReadInt32();
 exclude_new_messages = (flags & 2) != 0;
-ranges = (TLVector<TLMessageRange>)ObjectUtils.DeserializeVector<TLMessageRange>(br);
-
+ranges = (TLVector<TLAbsMessageRange>)ObjectUtils.DeserializeVector<TLAbsMessageRange>(br);
+Type = TLAbsChannelMessagesFilterTypes.TLChannelMessagesFilter;
         }
 
         public override void SerializeBody(BinaryWriter bw)

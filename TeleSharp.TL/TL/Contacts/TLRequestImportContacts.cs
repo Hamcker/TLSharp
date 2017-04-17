@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(-634342611)]
@@ -18,9 +21,9 @@ namespace TeleSharp.TL.Contacts
             }
         }
 
-                public TLVector<TLInputPhoneContact> contacts {get;set;}
+                public TLVector<TLAbsInputContact> contacts {get;set;}
         public bool replace {get;set;}
-        public Contacts.TLImportedContacts Response{ get; set;}
+        public Contacts.TLAbsImportedContacts Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -30,7 +33,7 @@ namespace TeleSharp.TL.Contacts
 
         public override void DeserializeBody(BinaryReader br)
         {
-            contacts = (TLVector<TLInputPhoneContact>)ObjectUtils.DeserializeVector<TLInputPhoneContact>(br);
+            contacts = (TLVector<TLAbsInputContact>)ObjectUtils.DeserializeVector<TLAbsInputContact>(br);
 replace = BoolUtil.Deserialize(br);
 
         }
@@ -44,7 +47,7 @@ BoolUtil.Serialize(replace,bw);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Contacts.TLImportedContacts)ObjectUtils.DeserializeObject(br);
+			Response = (Contacts.TLAbsImportedContacts)ObjectUtils.DeserializeObject(br);
 
 		}
     }

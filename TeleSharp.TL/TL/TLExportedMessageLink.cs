@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(524838915)]
-    public class TLExportedMessageLink : TLObject
+    public class TLExportedMessageLink : TLAbsExportedMessageLink
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL
         public override void DeserializeBody(BinaryReader br)
         {
             link = StringUtil.Deserialize(br);
-
+Type = TLAbsExportedMessageLinkTypes.TLExportedMessageLink;
         }
 
         public override void SerializeBody(BinaryWriter bw)

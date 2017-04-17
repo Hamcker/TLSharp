@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(-990308245)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Help
             }
         }
 
-                public TLConfig Response{ get; set;}
+                public TLAbsConfig Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -38,7 +41,7 @@ namespace TeleSharp.TL.Help
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (TLConfig)ObjectUtils.DeserializeObject(br);
+			Response = (TLAbsConfig)ObjectUtils.DeserializeObject(br);
 
 		}
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(196268545)]
@@ -35,7 +37,7 @@ flags = masks ? (flags | 1) : (flags & ~1);
             flags = br.ReadInt32();
 masks = (flags & 1) != 0;
 order = (TLVector<long>)ObjectUtils.DeserializeVector<long>(br);
-
+Type = TLAbsUpdateTypes.TLUpdateStickerSetsOrder;
         }
 
         public override void SerializeBody(BinaryWriter bw)

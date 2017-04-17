@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-346119674)]
@@ -25,7 +28,7 @@ namespace TeleSharp.TL.Messages
         public TLVector<TLAbsInputBotInlineResult> results {get;set;}
         public int cache_time {get;set;}
         public string next_offset {get;set;}
-        public TLInlineBotSwitchPM switch_pm {get;set;}
+        public TLAbsInlineBotSwitchPM switch_pm {get;set;}
         public bool Response{ get; set;}
 
 
@@ -53,7 +56,7 @@ else
 next_offset = null;
 
 if ((flags & 8) != 0)
-switch_pm = (TLInlineBotSwitchPM)ObjectUtils.DeserializeObject(br);
+switch_pm = (TLAbsInlineBotSwitchPM)ObjectUtils.DeserializeObject(br);
 else
 switch_pm = null;
 

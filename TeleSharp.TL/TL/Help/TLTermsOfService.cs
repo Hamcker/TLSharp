@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(-236044656)]
-    public class TLTermsOfService : TLObject
+    public class TLTermsOfService : TLAbsTermsOfService
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Help
         public override void DeserializeBody(BinaryReader br)
         {
             text = StringUtil.Deserialize(br);
-
+Type = TLAbsTermsOfServiceTypes.TLTermsOfService;
         }
 
         public override void SerializeBody(BinaryWriter bw)

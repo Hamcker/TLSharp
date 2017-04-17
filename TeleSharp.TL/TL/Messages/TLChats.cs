@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1694474197)]
-    public class TLChats : TLObject
+    public class TLChats : TLAbsChats
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Messages
         public override void DeserializeBody(BinaryReader br)
         {
             chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
-
+Type = TLAbsChatsTypes.TLChats;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1957577280)]
@@ -37,7 +39,7 @@ users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 date = br.ReadInt32();
 seq = br.ReadInt32();
-
+Type = TLAbsUpdatesTypes.TLUpdates;
         }
 
         public override void SerializeBody(BinaryWriter bw)

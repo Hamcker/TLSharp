@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1338747336)]
-    public class TLArchivedStickers : TLObject
+    public class TLArchivedStickers : TLAbsArchivedStickers
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Messages
         {
             count = br.ReadInt32();
 sets = (TLVector<TLAbsStickerSetCovered>)ObjectUtils.DeserializeVector<TLAbsStickerSetCovered>(br);
-
+Type = TLAbsArchivedStickersTypes.TLArchivedStickers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

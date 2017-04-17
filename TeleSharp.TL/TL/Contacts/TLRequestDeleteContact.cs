@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(-1902823612)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Contacts
         }
 
                 public TLAbsInputUser id {get;set;}
-        public Contacts.TLLink Response{ get; set;}
+        public Contacts.TLAbsLink Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Contacts
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Contacts.TLLink)ObjectUtils.DeserializeObject(br);
+			Response = (Contacts.TLAbsLink)ObjectUtils.DeserializeObject(br);
 
 		}
     }

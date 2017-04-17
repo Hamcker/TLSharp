@@ -1,66 +1,208 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.CodeDom;
+using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Models;
 
-namespace TeleSharp.Generator
+namespace TLGenerator
 {
     class Program
     {
-        static List<String> keywords = new List<string>(new string[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "async", "await", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "partial", "remove", "select", "set", "value", "var", "where", "where", "yield" });
-        static List<String> interfacesList = new List<string>();
-        static List<String> classesList = new List<string>();
         static void Main(string[] args)
         {
+            string fileAddress;
+            byte fileType = 0; // 1 json; 2 tl
 
-            string AbsStyle = File.ReadAllText("ConstructorAbs.tmp");
-            string NormalStyle = File.ReadAllText("Constructor.tmp");
-            string MethodStyle = File.ReadAllText("Method.tmp");
-            //string method = File.ReadAllText("constructor.tt");
-            string Json = "";
-            string url;
-            if (args.Count() == 0) url = "tl-schema.json"; else url = args[0];
+            if (args.Length == 0 || string.IsNullOrEmpty(args[0]))
+            {
+                var tlFiles = Directory.GetFiles(Environment.CurrentDirectory, "*.tl", SearchOption.TopDirectoryOnly);
 
-            Json = File.ReadAllText(url);
-            FileStream file = File.OpenWrite("Result.cs");
-            StreamWriter sw = new StreamWriter(file);
-            Schema schema = JsonConvert.DeserializeObject<Schema>(Json);
-            foreach (var c in schema.constructors)
-            {
-                interfacesList.Add(c.type);
-                classesList.Add(c.predicate);
-            }
-            foreach (var c in schema.constructors)
-            {
-                var list = schema.constructors.Where(x => x.type == c.type);
-                if (list.Count() > 1)
+                if (!tlFiles.Any())
                 {
-                    string path = (GetNameSpace(c.type).Replace("TeleSharp.TL", "TL\\").Replace(".", "") + "\\" + GetNameofClass(c.type, true) + ".cs").Replace("\\\\", "\\");
-                    FileStream classFile = MakeFile(path);
-                    using (StreamWriter writer = new StreamWriter(classFile))
+                    var jsonFiles = Directory.GetFiles(Environment.CurrentDirectory, "*.json", SearchOption.TopDirectoryOnly);
+
+                    if (!jsonFiles.Any())
                     {
-                        string nspace = (GetNameSpace(c.type).Replace("TeleSharp.TL", "TL\\").Replace(".", "")).Replace("\\\\", "\\").Replace("\\", ".");
-                        if (nspace.EndsWith("."))
-                            nspace = nspace.Remove(nspace.Length - 1, 1);
-                        string temp = AbsStyle.Replace("/* NAMESPACE */", "TeleSharp." + nspace);
-                        temp = temp.Replace("/* NAME */", GetNameofClass(c.type, true));
-                        writer.Write(temp);
-                        writer.Close();
-                        classFile.Close();
+                        throw new Exception("There is no *.tl or *.json file in direcory or any argument.");
+                    }
+                    else
+                    {
+                        fileAddress = jsonFiles.First();
+                        fileType = 1;
                     }
                 }
                 else
                 {
-                    interfacesList.Remove(list.First().type);
-                    list.First().type = "himself";
+                    fileAddress = tlFiles.First();
+                    fileType = 2;
                 }
             }
+            else
+            {
+                fileAddress = args[0];
+                if (args[0].EndsWith("json")) fileType = 1;
+                else if (args[0].EndsWith("tl")) fileType = 2;
+                else throw new Exception("Invalid file type. Json or Tl expected.");
+            }
+
+            switch (fileType)
+            {
+                case 1:
+                    ParseJsonByFile(fileAddress);
+                    break;
+
+                case 2:
+                    ParseTL(fileAddress);
+                    break;
+            }
+
+        }
+
+        public static void ParseJsonByFile(string FileAddress)
+        {
+            string json = File.ReadAllText(FileAddress);
+            ParseJson(json);
+        }
+
+        public static void ParseTL(string FileAddress)
+        {
+            string source = File.ReadAllText(FileAddress);
+            IEnumerable<string> sourceLines = source.Split('\n');
+
+            //remove comments and empty lines
+            sourceLines = sourceLines.Where(x => !x.StartsWith("//") && !string.IsNullOrEmpty(x) && !string.IsNullOrWhiteSpace(x));
+
+            //remove semicolons
+            sourceLines = sourceLines.Select(x => x.Replace(";", "")).ToList();
+
+            byte section = 1; // 1 types; 2 functions
+            Models.Schema schema = new Models.Schema();
+
+            foreach (string line in sourceLines)
+            {
+                switch (line)
+                {
+                    case "---types---":
+                        section = 1;
+                        continue;
+
+                    case "---functions---":
+                        section = 2;
+                        continue;
+                }
+
+                List<string> lineParts = line.Split(' ').ToList();
+                string constHeader = lineParts[0];
+                string constNameAssembly = constHeader.Split('#')[0];
+                string constAssembly = constNameAssembly.Contains(".") ? constNameAssembly.Split('.')[0] : "";
+                string constName = constNameAssembly.Contains(".") ? constNameAssembly.Split('.')[1] : constNameAssembly;
+                string constId = constHeader.Split('#')[1];
+
+                if (constNameAssembly.Contains("vector"))
+                {
+                    continue;
+                }
+
+                int equalIndex = lineParts.ToList().IndexOf("=");
+
+                if (section == 1) // types (contsructors)
+                {
+                    Models.Constructor @const = new Models.Constructor { id = int.Parse(constId, System.Globalization.NumberStyles.HexNumber), predicate = constNameAssembly, type = lineParts[equalIndex + 1] };
+
+                    if (equalIndex > 1)
+                    {
+                        for (int i = 1; i < equalIndex; i++)
+                        {
+                            string constParam = lineParts[i];
+
+                            if (constParam != "{X:Type}")
+                            {
+                                @const.Params.Add(new Models.Param { name = constParam.Split(':')[0], type = constParam.Split(':')[1] });
+                            }
+                        }
+                    }
+
+                    schema.constructors.Add(@const);
+                }
+                else if (section == 2) // functions
+                {
+                    Models.Method @const = new Models.Method { id = int.Parse(constId, System.Globalization.NumberStyles.HexNumber), method = constNameAssembly, type = lineParts[equalIndex + 1] };
+
+                    if (equalIndex > 1)
+                    {
+                        for (int i = 1; i < equalIndex; i++)
+                        {
+                            string constParam = lineParts[i];
+
+                            if (constParam != "{X:Type}")
+                            {
+                                @const.Params.Add(new Models.Param { name = constParam.Split(':')[0], type = constParam.Split(':')[1] });
+                            }
+                        }
+                    }
+
+                    schema.methods.Add(@const);
+                }
+            }
+
+            File.WriteAllText("schema.json", JsonConvert.SerializeObject(schema));
+
+            ParseObject(schema);
+        }
+
+
+
+        /***********************************************/
+        static List<string> keywords = new List<string>(new string[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while", "add", "alias", "ascending", "async", "await", "descending", "dynamic", "from", "get", "global", "group", "into", "join", "let", "orderby", "partial", "partial", "remove", "select", "set", "value", "var", "where", "where", "yield" });
+        static List<string> interfacesList = new List<string>();
+        static List<string> classesList = new List<string>();
+
+        public static void ParseJson(string JSonString)
+        {
+            Models.Schema obj = JsonConvert.DeserializeObject<Models.Schema>(JSonString);
+            ParseObject(obj);
+        }
+
+        public static void ParseObject(Models.Schema schema)
+        {
+            string AbsStyle = File.ReadAllText("ConstructorAbs.tmp");
+            string NormalStyle = File.ReadAllText("Constructor.tmp");
+            string MethodStyle = File.ReadAllText("Method.tmp");
+            string ToStyle = File.ReadAllText("ToMethod.tmp");
+
+            foreach (Constructor c in schema.constructors)
+            {
+                interfacesList.Add(c.type);
+                classesList.Add(c.predicate);
+            }
+
+            //interfacesList = interfacesList.Distinct().ToList();
+
+            // Creating TLAbs*.cs files
+            foreach (var c in schema.constructors)
+            {
+                string path = (GetNameSpace(c.type).Replace("TeleSharp.TL", "TL\\").Replace(".", "") + "\\" + GetNameofClass(c.type, true) + ".cs").Replace("\\\\", "\\");
+                FileStream classFile = MakeFile(path);
+                using (StreamWriter writer = new StreamWriter(classFile))
+                {
+                    string nspace = (GetNameSpace(c.type).Replace("TeleSharp.TL", "TL\\").Replace(".", "")).Replace("\\\\", "\\").Replace("\\", ".");
+                    if (nspace.EndsWith("."))
+                        nspace = nspace.Remove(nspace.Length - 1, 1);
+                    string temp = AbsStyle.Replace("/* NAMESPACE */", "TeleSharp." + nspace);
+                    temp = temp.Replace("/* NAME */", GetNameofClass(c.type, true));
+                    temp = temp.Replace("/*TYPES*/", string.Join(",", schema.constructors.Where(x => x.type == c.type).Select(x => GetNameofClass(x.predicate)).ToArray()));
+                    temp = temp.Replace("/*Tos*/", string.Join("\n", schema.constructors.Where(x => x.type == c.type).Select(x => ToStyle.Replace("/*Type*/", GetNameofClass(x.predicate)))));
+                    writer.Write(temp);
+                    writer.Close();
+                    classFile.Close();
+                }
+            }
+
+            // Creating TL.s files
             foreach (var c in schema.constructors)
             {
                 string path = (GetNameSpace(c.predicate).Replace("TeleSharp.TL", "TL\\").Replace(".", "") + "\\" + GetNameofClass(c.predicate, false) + ".cs").Replace("\\\\", "\\");
@@ -72,7 +214,8 @@ namespace TeleSharp.Generator
                     if (nspace.EndsWith("."))
                         nspace = nspace.Remove(nspace.Length - 1, 1);
                     string temp = NormalStyle.Replace("/* NAMESPACE */", "TeleSharp." + nspace);
-                    temp = (c.type == "himself") ? temp.Replace("/* PARENT */", "TLObject") : temp.Replace("/* PARENT */", GetNameofClass(c.type, true));
+                    //temp = (c.type == "himself") ? temp.Replace("/* PARENT */", "TLObject") : temp.Replace("/* PARENT */", GetNameofClass(c.type, true));
+                    temp = temp.Replace("/* PARENT */", GetNameofClass(c.type, true));
                     temp = temp.Replace("/*Constructor*/", c.id.ToString());
                     temp = temp.Replace("/* NAME */", GetNameofClass(c.predicate, false));
                     #endregion
@@ -120,6 +263,7 @@ namespace TeleSharp.Generator
                     {
                         deserialize += WriteReadCode(p) + Environment.NewLine;
                     }
+                    deserialize += $"Type = {GetNameofClass(c.type, true)}Types.{GetNameofClass(c.predicate)};";
                     temp = temp.Replace("/* DESERIALIZE */", deserialize);
                     #endregion
                     writer.Write(temp);
@@ -127,6 +271,8 @@ namespace TeleSharp.Generator
                     classFile.Close();
                 }
             }
+
+            // creating TLRequest*.cs files
             foreach (var c in schema.methods)
             {
                 string path = (GetNameSpace(c.method).Replace("TeleSharp.TL", "TL\\").Replace(".", "") + "\\" + GetNameofClass(c.method, false, true) + ".cs").Replace("\\\\", "\\");
@@ -201,10 +347,16 @@ namespace TeleSharp.Generator
                 }
             }
         }
+
+
         public static string FormatName(string input)
         {
             if (String.IsNullOrEmpty(input))
                 throw new ArgumentException("ARGH!");
+
+            if (input.Contains(" "))
+                input = input.Split(' ')[0];
+
             if (input.IndexOf('.') != -1)
             {
                 input = input.Replace(".", " ");
@@ -298,13 +450,17 @@ namespace TeleSharp.Generator
                     return "TLObject";
                 case "x":
                     return "TLObject";
+                case "int128":
+                    return "Int128";
+                case "int256":
+                    return "Int256";
             }
 
-            if (type.StartsWith("Vector"))
-                return "TLVector<" + GetTypeName(type.Replace("Vector<", "").Replace(">", "")) + ">";
+            if (type.ToLower().StartsWith("vector"))
+                return "TLVector<" + GetTypeName(type.Replace("vector<", "").Replace("Vector<", "").Replace(">", "")) + ">";
 
-            if (type.ToLower().Contains("inputcontact"))
-                return "TLInputPhoneContact";
+            //if (type.ToLower().Contains("inputcontact"))
+            //    return "TLInputPhoneContact";
 
 
             if (type.IndexOf('.') != -1 && type.IndexOf('?') == -1)
@@ -320,9 +476,9 @@ namespace TeleSharp.Generator
             else if (type.IndexOf('?') == -1)
             {
                 if (interfacesList.Any(x => x.ToLower() == type.ToLower()))
-                    return "TLAbs" + type;
+                    return "TLAbs" + FormatName(type);
                 else if (classesList.Any(x => x.ToLower() == type.ToLower()))
-                    return "TL" + type;
+                    return "TL" + FormatName(type);
                 else
                     return type;
             }
@@ -427,6 +583,6 @@ namespace TeleSharp.Generator
                 File.Delete(path);
             return File.OpenWrite(path);
         }
-    }
 
+    }
 }

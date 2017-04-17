@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1551583367)]
-    public class TLReceivedNotifyMessage : TLObject
+    public class TLReceivedNotifyMessage : TLAbsReceivedNotifyMessage
     {
         public override int Constructor
         {
@@ -32,7 +34,7 @@ namespace TeleSharp.TL
         {
             id = br.ReadInt32();
 flags = br.ReadInt32();
-
+Type = TLAbsReceivedNotifyMessageTypes.TLReceivedNotifyMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

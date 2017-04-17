@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-352032773)]
@@ -39,7 +41,7 @@ pts = br.ReadInt32();
 else
 pts = null;
 
-
+Type = TLAbsUpdateTypes.TLUpdateChannelTooLong;
         }
 
         public override void SerializeBody(BinaryWriter bw)

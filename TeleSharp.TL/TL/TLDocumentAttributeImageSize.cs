@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1815593308)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             w = br.ReadInt32();
 h = br.ReadInt32();
-
+Type = TLAbsDocumentAttributeTypes.TLDocumentAttributeImageSize;
         }
 
         public override void SerializeBody(BinaryWriter bw)

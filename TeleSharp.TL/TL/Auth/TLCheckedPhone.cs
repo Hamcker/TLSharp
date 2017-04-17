@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(-2128698738)]
-    public class TLCheckedPhone : TLObject
+    public class TLCheckedPhone : TLAbsCheckedPhone
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Auth
         public override void DeserializeBody(BinaryReader br)
         {
             phone_registered = BoolUtil.Deserialize(br);
-
+Type = TLAbsCheckedPhoneTypes.TLCheckedPhone;
         }
 
         public override void SerializeBody(BinaryWriter bw)

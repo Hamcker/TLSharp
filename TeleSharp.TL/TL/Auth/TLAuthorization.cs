@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(-855308010)]
-    public class TLAuthorization : TLObject
+    public class TLAuthorization : TLAbsAuthorization
     {
         public override int Constructor
         {
@@ -39,7 +41,7 @@ else
 tmp_sessions = null;
 
 user = (TLAbsUser)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsAuthorizationTypes.TLAuthorization;
         }
 
         public override void SerializeBody(BinaryWriter bw)

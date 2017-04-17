@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-317144808)]
@@ -37,7 +39,7 @@ chat_id = br.ReadInt32();
 date = br.ReadInt32();
 bytes = BytesUtil.Deserialize(br);
 file = (TLAbsEncryptedFile)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsEncryptedMessageTypes.TLEncryptedMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

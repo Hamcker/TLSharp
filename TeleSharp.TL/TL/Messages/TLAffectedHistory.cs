@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-1269012015)]
-    public class TLAffectedHistory : TLObject
+    public class TLAffectedHistory : TLAbsAffectedHistory
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Messages
             pts = br.ReadInt32();
 pts_count = br.ReadInt32();
 offset = br.ReadInt32();
-
+Type = TLAbsAffectedHistoryTypes.TLAffectedHistory;
         }
 
         public override void SerializeBody(BinaryWriter bw)

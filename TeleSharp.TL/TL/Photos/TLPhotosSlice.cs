@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Photos
 {
 	[TLObject(352657236)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Photos
             count = br.ReadInt32();
 photos = (TLVector<TLAbsPhoto>)ObjectUtils.DeserializeVector<TLAbsPhoto>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsPhotosTypes.TLPhotosSlice;
         }
 
         public override void SerializeBody(BinaryWriter bw)

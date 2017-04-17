@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1218642516)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL
             }
         }
 
-             public TLVector<TLKeyboardButtonRow> rows {get;set;}
+             public TLVector<TLAbsKeyboardButtonRow> rows {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,8 +30,8 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            rows = (TLVector<TLKeyboardButtonRow>)ObjectUtils.DeserializeVector<TLKeyboardButtonRow>(br);
-
+            rows = (TLVector<TLAbsKeyboardButtonRow>)ObjectUtils.DeserializeVector<TLAbsKeyboardButtonRow>(br);
+Type = TLAbsReplyMarkupTypes.TLReplyInlineMarkup;
         }
 
         public override void SerializeBody(BinaryWriter bw)

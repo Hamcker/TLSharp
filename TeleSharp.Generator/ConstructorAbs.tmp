@@ -7,7 +7,20 @@ using System.Threading.Tasks;
 using TeleSharp.TL;
 namespace /* NAMESPACE */
 {
+	public enum /* NAME */Types
+	{
+		/*TYPES*/
+	}
+
     public abstract class /* NAME */ : TLObject
     {
+		public /* NAME */Types Type { get; set; } 
+
+		public T To<T>() where T : /* NAME */
+        {
+            return this as T;
+        }
+
+/*Tos*/
     }
 }

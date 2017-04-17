@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Storage
 {
 	[TLObject(1086091090)]
@@ -27,7 +29,7 @@ namespace TeleSharp.TL.Storage
 
         public override void DeserializeBody(BinaryReader br)
         {
-            
+            Type = TLAbsFileTypeTypes.TLFilePartial;
         }
 
         public override void SerializeBody(BinaryWriter bw)

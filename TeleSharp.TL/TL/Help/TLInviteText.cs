@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(415997816)]
-    public class TLInviteText : TLObject
+    public class TLInviteText : TLAbsInviteText
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Help
         public override void DeserializeBody(BinaryReader br)
         {
             message = StringUtil.Deserialize(br);
-
+Type = TLAbsInviteTextTypes.TLInviteText;
         }
 
         public override void SerializeBody(BinaryWriter bw)

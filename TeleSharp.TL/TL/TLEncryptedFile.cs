@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1248893260)]
@@ -37,7 +39,7 @@ access_hash = br.ReadInt64();
 size = br.ReadInt32();
 dc_id = br.ReadInt32();
 key_fingerprint = br.ReadInt32();
-
+Type = TLAbsEncryptedFileTypes.TLEncryptedFile;
         }
 
         public override void SerializeBody(BinaryWriter bw)

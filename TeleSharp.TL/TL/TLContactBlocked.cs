@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1444661369)]
-    public class TLContactBlocked : TLObject
+    public class TLContactBlocked : TLAbsContactBlocked
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             user_id = br.ReadInt32();
 date = br.ReadInt32();
-
+Type = TLAbsContactBlockedTypes.TLContactBlocked;
         }
 
         public override void SerializeBody(BinaryWriter bw)

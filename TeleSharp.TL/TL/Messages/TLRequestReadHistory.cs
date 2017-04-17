@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(238054714)]
@@ -20,7 +23,7 @@ namespace TeleSharp.TL.Messages
 
                 public TLAbsInputPeer peer {get;set;}
         public int max_id {get;set;}
-        public Messages.TLAffectedMessages Response{ get; set;}
+        public Messages.TLAbsAffectedMessages Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -44,7 +47,7 @@ bw.Write(max_id);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLAffectedMessages)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsAffectedMessages)ObjectUtils.DeserializeObject(br);
 
 		}
     }

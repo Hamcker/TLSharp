@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Updates
 {
 	[TLObject(-1519637954)]
-    public class TLState : TLObject
+    public class TLState : TLAbsState
     {
         public override int Constructor
         {
@@ -37,7 +39,7 @@ qts = br.ReadInt32();
 date = br.ReadInt32();
 seq = br.ReadInt32();
 unread_count = br.ReadInt32();
-
+Type = TLAbsStateTypes.TLState;
         }
 
         public override void SerializeBody(BinaryWriter bw)

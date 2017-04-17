@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-350980120)]
@@ -29,7 +31,7 @@ namespace TeleSharp.TL
         public override void DeserializeBody(BinaryReader br)
         {
             id = br.ReadInt64();
-
+Type = TLAbsWebPageTypes.TLWebPageEmpty;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1662091044)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 title = StringUtil.Deserialize(br);
 bg_color = br.ReadInt32();
 color = br.ReadInt32();
-
+Type = TLAbsWallPaperTypes.TLWallPaperSolid;
         }
 
         public override void SerializeBody(BinaryWriter bw)

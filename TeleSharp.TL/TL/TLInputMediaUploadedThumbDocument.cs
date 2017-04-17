@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1356369070)]
@@ -47,7 +49,7 @@ stickers = (TLVector<TLAbsInputDocument>)ObjectUtils.DeserializeVector<TLAbsInpu
 else
 stickers = null;
 
-
+Type = TLAbsInputMediaTypes.TLInputMediaUploadedThumbDocument;
         }
 
         public override void SerializeBody(BinaryWriter bw)

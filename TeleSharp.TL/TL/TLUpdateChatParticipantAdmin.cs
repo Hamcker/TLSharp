@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1232070311)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 user_id = br.ReadInt32();
 is_admin = BoolUtil.Deserialize(br);
 version = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateChatParticipantAdmin;
         }
 
         public override void SerializeBody(BinaryWriter bw)

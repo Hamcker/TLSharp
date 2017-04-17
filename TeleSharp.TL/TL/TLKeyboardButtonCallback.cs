@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1748655686)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             text = StringUtil.Deserialize(br);
 data = BytesUtil.Deserialize(br);
-
+Type = TLAbsKeyboardButtonTypes.TLKeyboardButtonCallback;
         }
 
         public override void SerializeBody(BinaryWriter bw)

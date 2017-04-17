@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Help
 {
 	[TLObject(-1987579119)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL.Help
 critical = BoolUtil.Deserialize(br);
 url = StringUtil.Deserialize(br);
 text = StringUtil.Deserialize(br);
-
+Type = TLAbsAppUpdateTypes.TLAppUpdate;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1072550713)]
-    public class TLTrue : TLObject
+    public class TLTrue : TLAbsTrue
     {
         public override int Constructor
         {
@@ -27,7 +29,7 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            
+            Type = TLAbsTrueTypes.TLTrue;
         }
 
         public override void SerializeBody(BinaryWriter bw)

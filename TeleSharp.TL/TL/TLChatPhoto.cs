@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1632839530)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             photo_small = (TLAbsFileLocation)ObjectUtils.DeserializeObject(br);
 photo_big = (TLAbsFileLocation)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsChatPhotoTypes.TLChatPhoto;
         }
 
         public override void SerializeBody(BinaryWriter bw)

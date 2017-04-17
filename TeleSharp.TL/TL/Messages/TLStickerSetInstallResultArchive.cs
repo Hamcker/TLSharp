@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(904138920)]
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Messages
         public override void DeserializeBody(BinaryReader br)
         {
             sets = (TLVector<TLAbsStickerSetCovered>)ObjectUtils.DeserializeVector<TLAbsStickerSetCovered>(br);
-
+Type = TLAbsStickerSetInstallResultTypes.TLStickerSetInstallResultArchive;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(-113456221)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Contacts
         }
 
                 public string username {get;set;}
-        public Contacts.TLResolvedPeer Response{ get; set;}
+        public Contacts.TLAbsResolvedPeer Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Contacts
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Contacts.TLResolvedPeer)ObjectUtils.DeserializeObject(br);
+			Response = (Contacts.TLAbsResolvedPeer)ObjectUtils.DeserializeObject(br);
 
 		}
     }

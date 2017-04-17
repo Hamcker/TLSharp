@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(-543777747)]
-    public class TLExportedAuthorization : TLObject
+    public class TLExportedAuthorization : TLAbsExportedAuthorization
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Auth
         {
             id = br.ReadInt32();
 bytes = BytesUtil.Deserialize(br);
-
+Type = TLAbsExportedAuthorizationTypes.TLExportedAuthorization;
         }
 
         public override void SerializeBody(BinaryWriter bw)

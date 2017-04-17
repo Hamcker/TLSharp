@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(771925524)]
@@ -23,7 +25,7 @@ namespace TeleSharp.TL
      public TLAbsPhoto chat_photo {get;set;}
      public TLAbsPeerNotifySettings notify_settings {get;set;}
      public TLAbsExportedChatInvite exported_invite {get;set;}
-     public TLVector<TLBotInfo> bot_info {get;set;}
+     public TLVector<TLAbsBotInfo> bot_info {get;set;}
 
 
 		public void ComputeFlags()
@@ -38,8 +40,8 @@ participants = (TLAbsChatParticipants)ObjectUtils.DeserializeObject(br);
 chat_photo = (TLAbsPhoto)ObjectUtils.DeserializeObject(br);
 notify_settings = (TLAbsPeerNotifySettings)ObjectUtils.DeserializeObject(br);
 exported_invite = (TLAbsExportedChatInvite)ObjectUtils.DeserializeObject(br);
-bot_info = (TLVector<TLBotInfo>)ObjectUtils.DeserializeVector<TLBotInfo>(br);
-
+bot_info = (TLVector<TLAbsBotInfo>)ObjectUtils.DeserializeVector<TLAbsBotInfo>(br);
+Type = TLAbsChatFullTypes.TLChatFull;
         }
 
         public override void SerializeBody(BinaryWriter bw)

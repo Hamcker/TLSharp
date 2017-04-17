@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1662637586)]
@@ -22,7 +24,7 @@ namespace TeleSharp.TL
      public bool mask {get;set;}
      public string alt {get;set;}
      public TLAbsInputStickerSet stickerset {get;set;}
-     public TLMaskCoords mask_coords {get;set;}
+     public TLAbsMaskCoords mask_coords {get;set;}
 
 
 		public void ComputeFlags()
@@ -40,11 +42,11 @@ mask = (flags & 2) != 0;
 alt = StringUtil.Deserialize(br);
 stickerset = (TLAbsInputStickerSet)ObjectUtils.DeserializeObject(br);
 if ((flags & 1) != 0)
-mask_coords = (TLMaskCoords)ObjectUtils.DeserializeObject(br);
+mask_coords = (TLAbsMaskCoords)ObjectUtils.DeserializeObject(br);
 else
 mask_coords = null;
 
-
+Type = TLAbsDocumentAttributeTypes.TLDocumentAttributeSticker;
         }
 
         public override void SerializeBody(BinaryWriter bw)

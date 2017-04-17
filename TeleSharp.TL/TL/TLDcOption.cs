@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(98092748)]
-    public class TLDcOption : TLObject
+    public class TLDcOption : TLAbsDcOption
     {
         public override int Constructor
         {
@@ -45,7 +47,7 @@ tcpo_only = (flags & 4) != 0;
 id = br.ReadInt32();
 ip_address = StringUtil.Deserialize(br);
 port = br.ReadInt32();
-
+Type = TLAbsDcOptionTypes.TLDcOption;
         }
 
         public override void SerializeBody(BinaryWriter bw)

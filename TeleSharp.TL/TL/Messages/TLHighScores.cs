@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-1707344487)]
-    public class TLHighScores : TLObject
+    public class TLHighScores : TLAbsHighScores
     {
         public override int Constructor
         {
@@ -18,7 +20,7 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-             public TLVector<TLHighScore> scores {get;set;}
+             public TLVector<TLAbsHighScore> scores {get;set;}
      public TLVector<TLAbsUser> users {get;set;}
 
 
@@ -29,9 +31,9 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            scores = (TLVector<TLHighScore>)ObjectUtils.DeserializeVector<TLHighScore>(br);
+            scores = (TLVector<TLAbsHighScore>)ObjectUtils.DeserializeVector<TLAbsHighScore>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsHighScoresTypes.TLHighScores;
         }
 
         public override void SerializeBody(BinaryWriter bw)

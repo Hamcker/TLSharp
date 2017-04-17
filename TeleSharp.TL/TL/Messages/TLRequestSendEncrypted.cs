@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-1451792525)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-                public TLInputEncryptedChat peer {get;set;}
+                public TLAbsInputEncryptedChat peer {get;set;}
         public long random_id {get;set;}
         public byte[] data {get;set;}
         public Messages.TLAbsSentEncryptedMessage Response{ get; set;}
@@ -31,7 +34,7 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            peer = (TLInputEncryptedChat)ObjectUtils.DeserializeObject(br);
+            peer = (TLAbsInputEncryptedChat)ObjectUtils.DeserializeObject(br);
 random_id = br.ReadInt64();
 data = BytesUtil.Deserialize(br);
 

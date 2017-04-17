@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-947462709)]
-    public class TLMessageFwdHeader : TLObject
+    public class TLMessageFwdHeader : TLAbsMessageFwdHeader
     {
         public override int Constructor
         {
@@ -53,7 +55,7 @@ channel_post = br.ReadInt32();
 else
 channel_post = null;
 
-
+Type = TLAbsMessageFwdHeaderTypes.TLMessageFwdHeader;
         }
 
         public override void SerializeBody(BinaryWriter bw)

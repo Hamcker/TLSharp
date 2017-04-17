@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Photos
 {
 	[TLObject(-1916114267)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Photos
         {
             photos = (TLVector<TLAbsPhoto>)ObjectUtils.DeserializeVector<TLAbsPhoto>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsPhotosTypes.TLPhotos;
         }
 
         public override void SerializeBody(BinaryWriter bw)

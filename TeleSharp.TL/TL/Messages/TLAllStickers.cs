@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-302170017)]
@@ -19,7 +21,7 @@ namespace TeleSharp.TL.Messages
         }
 
              public int hash {get;set;}
-     public TLVector<TLStickerSet> sets {get;set;}
+     public TLVector<TLAbsStickerSet> sets {get;set;}
 
 
 		public void ComputeFlags()
@@ -30,8 +32,8 @@ namespace TeleSharp.TL.Messages
         public override void DeserializeBody(BinaryReader br)
         {
             hash = br.ReadInt32();
-sets = (TLVector<TLStickerSet>)ObjectUtils.DeserializeVector<TLStickerSet>(br);
-
+sets = (TLVector<TLAbsStickerSet>)ObjectUtils.DeserializeVector<TLAbsStickerSet>(br);
+Type = TLAbsAllStickersTypes.TLAllStickers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-2027738169)]
@@ -45,7 +47,7 @@ thumb = (TLAbsPhotoSize)ObjectUtils.DeserializeObject(br);
 dc_id = br.ReadInt32();
 version = br.ReadInt32();
 attributes = (TLVector<TLAbsDocumentAttribute>)ObjectUtils.DeserializeVector<TLAbsDocumentAttribute>(br);
-
+Type = TLAbsDocumentTypes.TLDocument;
         }
 
         public override void SerializeBody(BinaryWriter bw)

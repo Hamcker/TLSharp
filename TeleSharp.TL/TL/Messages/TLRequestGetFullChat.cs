@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(998448230)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Messages
         }
 
                 public int chat_id {get;set;}
-        public Messages.TLChatFull Response{ get; set;}
+        public Messages.TLAbsChatFull Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Messages
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLChatFull)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsChatFull)ObjectUtils.DeserializeObject(br);
 
 		}
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1670052855)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             url = StringUtil.Deserialize(br);
 photo = (TLAbsPhoto)ObjectUtils.DeserializeObject(br);
 document = (TLAbsDocument)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsFoundGifTypes.TLFoundGifCached;
         }
 
         public override void SerializeBody(BinaryWriter bw)

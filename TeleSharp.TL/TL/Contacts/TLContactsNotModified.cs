@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(-1219778094)]
@@ -27,7 +29,7 @@ namespace TeleSharp.TL.Contacts
 
         public override void DeserializeBody(BinaryReader br)
         {
-            
+            Type = TLAbsContactsTypes.TLContactsNotModified;
         }
 
         public override void SerializeBody(BinaryWriter bw)

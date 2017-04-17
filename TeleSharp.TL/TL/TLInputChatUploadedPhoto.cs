@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1837345356)]
@@ -29,7 +31,7 @@ namespace TeleSharp.TL
         public override void DeserializeBody(BinaryReader br)
         {
             file = (TLAbsInputFile)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsInputChatPhotoTypes.TLInputChatUploadedPhoto;
         }
 
         public override void SerializeBody(BinaryWriter bw)

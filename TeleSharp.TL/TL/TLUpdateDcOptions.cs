@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1906403213)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL
             }
         }
 
-             public TLVector<TLDcOption> dc_options {get;set;}
+             public TLVector<TLAbsDcOption> dc_options {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,8 +30,8 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            dc_options = (TLVector<TLDcOption>)ObjectUtils.DeserializeVector<TLDcOption>(br);
-
+            dc_options = (TLVector<TLAbsDcOption>)ObjectUtils.DeserializeVector<TLAbsDcOption>(br);
+Type = TLAbsUpdateTypes.TLUpdateDcOptions;
         }
 
         public override void SerializeBody(BinaryWriter bw)

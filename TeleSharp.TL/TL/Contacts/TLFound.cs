@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Contacts
 {
 	[TLObject(446822276)]
-    public class TLFound : TLObject
+    public class TLFound : TLAbsFound
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Contacts
             results = (TLVector<TLAbsPeer>)ObjectUtils.DeserializeVector<TLAbsPeer>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-
+Type = TLAbsFoundTypes.TLFound;
         }
 
         public override void SerializeBody(BinaryWriter bw)

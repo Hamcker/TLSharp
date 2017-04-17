@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1336154098)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             id = StringUtil.Deserialize(br);
 short_name = StringUtil.Deserialize(br);
 send_message = (TLAbsInputBotInlineMessage)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsInputBotInlineResultTypes.TLInputBotInlineResultGame;
         }
 
         public override void SerializeBody(BinaryWriter bw)

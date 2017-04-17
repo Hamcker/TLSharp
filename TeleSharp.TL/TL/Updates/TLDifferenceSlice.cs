@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Updates
 {
 	[TLObject(-1459938943)]
@@ -23,7 +25,7 @@ namespace TeleSharp.TL.Updates
      public TLVector<TLAbsUpdate> other_updates {get;set;}
      public TLVector<TLAbsChat> chats {get;set;}
      public TLVector<TLAbsUser> users {get;set;}
-     public Updates.TLState intermediate_state {get;set;}
+     public Updates.TLAbsState intermediate_state {get;set;}
 
 
 		public void ComputeFlags()
@@ -38,8 +40,8 @@ new_encrypted_messages = (TLVector<TLAbsEncryptedMessage>)ObjectUtils.Deserializ
 other_updates = (TLVector<TLAbsUpdate>)ObjectUtils.DeserializeVector<TLAbsUpdate>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-intermediate_state = (Updates.TLState)ObjectUtils.DeserializeObject(br);
-
+intermediate_state = (Updates.TLAbsState)ObjectUtils.DeserializeObject(br);
+Type = TLAbsDifferenceTypes.TLDifferenceSlice;
         }
 
         public override void SerializeBody(BinaryWriter bw)

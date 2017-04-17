@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(2135648522)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-                public TLInputEncryptedChat peer {get;set;}
+                public TLAbsInputEncryptedChat peer {get;set;}
         public int max_date {get;set;}
         public bool Response{ get; set;}
 
@@ -30,7 +33,7 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            peer = (TLInputEncryptedChat)ObjectUtils.DeserializeObject(br);
+            peer = (TLAbsInputEncryptedChat)ObjectUtils.DeserializeObject(br);
 max_date = br.ReadInt32();
 
         }

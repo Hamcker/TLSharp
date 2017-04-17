@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(541710092)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             @long = br.ReadDouble();
 lat = br.ReadDouble();
-
+Type = TLAbsGeoPointTypes.TLGeoPoint;
         }
 
         public override void SerializeBody(BinaryWriter bw)

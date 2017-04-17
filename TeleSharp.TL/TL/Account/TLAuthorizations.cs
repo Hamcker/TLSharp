@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(307276766)]
-    public class TLAuthorizations : TLObject
+    public class TLAuthorizations : TLAbsAuthorizations
     {
         public override int Constructor
         {
@@ -18,7 +20,7 @@ namespace TeleSharp.TL.Account
             }
         }
 
-             public TLVector<TLAuthorization> authorizations {get;set;}
+             public TLVector<TLAbsAuthorization> authorizations {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,8 +30,8 @@ namespace TeleSharp.TL.Account
 
         public override void DeserializeBody(BinaryReader br)
         {
-            authorizations = (TLVector<TLAuthorization>)ObjectUtils.DeserializeVector<TLAuthorization>(br);
-
+            authorizations = (TLVector<TLAbsAuthorization>)ObjectUtils.DeserializeVector<TLAbsAuthorization>(br);
+Type = TLAbsAuthorizationsTypes.TLAuthorizations;
         }
 
         public override void SerializeBody(BinaryWriter bw)

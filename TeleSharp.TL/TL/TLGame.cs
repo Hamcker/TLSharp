@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1107729093)]
-    public class TLGame : TLObject
+    public class TLGame : TLAbsGame
     {
         public override int Constructor
         {
@@ -49,7 +51,7 @@ document = (TLAbsDocument)ObjectUtils.DeserializeObject(br);
 else
 document = null;
 
-
+Type = TLAbsGameTypes.TLGame;
         }
 
         public override void SerializeBody(BinaryWriter bw)

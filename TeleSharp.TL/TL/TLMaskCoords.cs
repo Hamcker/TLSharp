@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1361650766)]
-    public class TLMaskCoords : TLObject
+    public class TLMaskCoords : TLAbsMaskCoords
     {
         public override int Constructor
         {
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 x = br.ReadDouble();
 y = br.ReadDouble();
 zoom = br.ReadDouble();
-
+Type = TLAbsMaskCoordsTypes.TLMaskCoords;
         }
 
         public override void SerializeBody(BinaryWriter bw)

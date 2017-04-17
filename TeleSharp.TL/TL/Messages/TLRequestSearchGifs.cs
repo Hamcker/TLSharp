@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-1080395925)]
@@ -20,7 +23,7 @@ namespace TeleSharp.TL.Messages
 
                 public string q {get;set;}
         public int offset {get;set;}
-        public Messages.TLFoundGifs Response{ get; set;}
+        public Messages.TLAbsFoundGifs Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -44,7 +47,7 @@ bw.Write(offset);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLFoundGifs)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsFoundGifs)ObjectUtils.DeserializeObject(br);
 
 		}
     }

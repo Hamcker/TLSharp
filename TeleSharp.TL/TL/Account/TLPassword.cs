@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(2081952796)]
@@ -37,7 +39,7 @@ new_salt = BytesUtil.Deserialize(br);
 hint = StringUtil.Deserialize(br);
 has_recovery = BoolUtil.Deserialize(br);
 email_unconfirmed_pattern = StringUtil.Deserialize(br);
-
+Type = TLAbsPasswordTypes.TLPassword;
         }
 
         public override void SerializeBody(BinaryWriter bw)

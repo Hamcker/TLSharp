@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1336546578)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             title = StringUtil.Deserialize(br);
 chat_id = br.ReadInt32();
-
+Type = TLAbsMessageActionTypes.TLMessageActionChannelMigrateFrom;
         }
 
         public override void SerializeBody(BinaryWriter bw)

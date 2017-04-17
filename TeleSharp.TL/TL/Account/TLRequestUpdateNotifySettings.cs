@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(-2067899501)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Account
         }
 
                 public TLAbsInputNotifyPeer peer {get;set;}
-        public TLInputPeerNotifySettings settings {get;set;}
+        public TLAbsInputPeerNotifySettings settings {get;set;}
         public bool Response{ get; set;}
 
 
@@ -31,7 +34,7 @@ namespace TeleSharp.TL.Account
         public override void DeserializeBody(BinaryReader br)
         {
             peer = (TLAbsInputNotifyPeer)ObjectUtils.DeserializeObject(br);
-settings = (TLInputPeerNotifySettings)ObjectUtils.DeserializeObject(br);
+settings = (TLAbsInputPeerNotifySettings)ObjectUtils.DeserializeObject(br);
 
         }
 

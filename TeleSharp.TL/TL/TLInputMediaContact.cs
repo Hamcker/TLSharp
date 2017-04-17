@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1494984313)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             phone_number = StringUtil.Deserialize(br);
 first_name = StringUtil.Deserialize(br);
 last_name = StringUtil.Deserialize(br);
-
+Type = TLAbsInputMediaTypes.TLInputMediaContact;
         }
 
         public override void SerializeBody(BinaryWriter bw)

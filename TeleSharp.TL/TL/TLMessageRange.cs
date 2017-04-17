@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(182649427)]
-    public class TLMessageRange : TLObject
+    public class TLMessageRange : TLAbsMessageRange
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             min_id = br.ReadInt32();
 max_id = br.ReadInt32();
-
+Type = TLAbsMessageRangeTypes.TLMessageRange;
         }
 
         public override void SerializeBody(BinaryWriter bw)

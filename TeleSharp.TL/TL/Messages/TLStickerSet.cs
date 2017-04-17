@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-1240849242)]
-    public class TLStickerSet : TLObject
+    public class TLStickerSet : TLAbsStickerSet
     {
         public override int Constructor
         {
@@ -18,8 +20,8 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-             public TLStickerSet @set {get;set;}
-     public TLVector<TLStickerPack> packs {get;set;}
+             public TLAbsStickerSet @set {get;set;}
+     public TLVector<TLAbsStickerPack> packs {get;set;}
      public TLVector<TLAbsDocument> documents {get;set;}
 
 
@@ -30,10 +32,10 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            @set = (TLStickerSet)ObjectUtils.DeserializeObject(br);
-packs = (TLVector<TLStickerPack>)ObjectUtils.DeserializeVector<TLStickerPack>(br);
+            @set = (TLAbsStickerSet)ObjectUtils.DeserializeObject(br);
+packs = (TLVector<TLAbsStickerPack>)ObjectUtils.DeserializeVector<TLAbsStickerPack>(br);
 documents = (TLVector<TLAbsDocument>)ObjectUtils.DeserializeVector<TLAbsDocument>(br);
-
+Type = TLAbsStickerSetTypes.TLStickerSet;
         }
 
         public override void SerializeBody(BinaryWriter bw)

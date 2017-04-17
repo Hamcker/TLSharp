@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(2086234950)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             volume_id = br.ReadInt64();
 local_id = br.ReadInt32();
 secret = br.ReadInt64();
-
+Type = TLAbsFileLocationTypes.TLFileLocationUnavailable;
         }
 
         public override void SerializeBody(BinaryWriter bw)

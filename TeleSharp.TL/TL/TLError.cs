@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-994444869)]
-    public class TLError : TLObject
+    public class TLError : TLAbsError
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             code = br.ReadInt32();
 text = StringUtil.Deserialize(br);
-
+Type = TLAbsErrorTypes.TLError;
         }
 
         public override void SerializeBody(BinaryWriter bw)

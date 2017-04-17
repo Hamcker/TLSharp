@@ -68,7 +68,7 @@ namespace TLSharp.Core
         public int TimeOffset { get; set; }
         public long LastMessageId { get; set; }
         public int SessionExpires { get; set; }
-        public TLUser TLUser { get; set; }
+        public TLAbsUser TLAbsUser { get; set; }
         private Random random;
 
         private ISessionStore _store;
@@ -92,11 +92,11 @@ namespace TLSharp.Core
                 Serializers.String.write(writer, ServerAddress);
                 writer.Write(Port);
 
-                if (TLUser != null)
+                if (TLAbsUser != null)
                 {
                     writer.Write(1);
                     writer.Write(SessionExpires);
-                    ObjectUtils.SerializeObject(TLUser, writer);
+                    ObjectUtils.SerializeObject(TLAbsUser, writer);
                 }
                 else
                 {
@@ -124,11 +124,11 @@ namespace TLSharp.Core
 
                 var isAuthExsist = reader.ReadInt32() == 1;
                 int sessionExpires = 0;
-                TLUser TLUser = null;
+                TLAbsUser TLAbsUser = null;
                 if (isAuthExsist)
                 {
                     sessionExpires = reader.ReadInt32();
-                    TLUser = (TLUser)ObjectUtils.DeserializeObject(reader);
+                    TLAbsUser = (TLAbsUser)ObjectUtils.DeserializeObject(reader);
                 }
 
                 var authData = Serializers.Bytes.read(reader);
@@ -142,7 +142,7 @@ namespace TLSharp.Core
                     LastMessageId = lastMessageId,
                     TimeOffset = timeOffset,
                     SessionExpires = sessionExpires,
-                    TLUser = TLUser,
+                    TLAbsUser = TLAbsUser,
                     SessionUserId = sessionUserId,
                     ServerAddress = serverAddress,
                     Port = port

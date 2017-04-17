@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Photos
 {
 	[TLObject(1328726168)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Photos
         }
 
                 public TLAbsInputFile file {get;set;}
-        public Photos.TLPhoto Response{ get; set;}
+        public Photos.TLAbsPhoto Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Photos
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Photos.TLPhoto)ObjectUtils.DeserializeObject(br);
+			Response = (Photos.TLAbsPhoto)ObjectUtils.DeserializeObject(br);
 
 		}
     }

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1158290442)]
-    public class TLFoundGifs : TLObject
+    public class TLFoundGifs : TLAbsFoundGifs
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Messages
         {
             next_offset = br.ReadInt32();
 results = (TLVector<TLAbsFoundGif>)ObjectUtils.DeserializeVector<TLAbsFoundGif>(br);
-
+Type = TLAbsFoundGifsTypes.TLFoundGifs;
         }
 
         public override void SerializeBody(BinaryWriter bw)

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-305282981)]
-    public class TLTopPeer : TLObject
+    public class TLTopPeer : TLAbsTopPeer
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             peer = (TLAbsPeer)ObjectUtils.DeserializeObject(br);
 rating = br.ReadDouble();
-
+Type = TLAbsTopPeerTypes.TLTopPeer;
         }
 
         public override void SerializeBody(BinaryWriter bw)

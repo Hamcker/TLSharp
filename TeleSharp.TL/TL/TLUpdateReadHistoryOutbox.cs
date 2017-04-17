@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(791617983)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 max_id = br.ReadInt32();
 pts = br.ReadInt32();
 pts_count = br.ReadInt32();
-
+Type = TLAbsUpdateTypes.TLUpdateReadHistoryOutbox;
         }
 
         public override void SerializeBody(BinaryWriter bw)

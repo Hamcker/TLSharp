@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(863093588)]
-    public class TLPeerDialogs : TLObject
+    public class TLPeerDialogs : TLAbsPeerDialogs
     {
         public override int Constructor
         {
@@ -18,11 +20,11 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-             public TLVector<TLDialog> dialogs {get;set;}
+             public TLVector<TLAbsDialog> dialogs {get;set;}
      public TLVector<TLAbsMessage> messages {get;set;}
      public TLVector<TLAbsChat> chats {get;set;}
      public TLVector<TLAbsUser> users {get;set;}
-     public Updates.TLState state {get;set;}
+     public Updates.TLAbsState state {get;set;}
 
 
 		public void ComputeFlags()
@@ -32,12 +34,12 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            dialogs = (TLVector<TLDialog>)ObjectUtils.DeserializeVector<TLDialog>(br);
+            dialogs = (TLVector<TLAbsDialog>)ObjectUtils.DeserializeVector<TLAbsDialog>(br);
 messages = (TLVector<TLAbsMessage>)ObjectUtils.DeserializeVector<TLAbsMessage>(br);
 chats = (TLVector<TLAbsChat>)ObjectUtils.DeserializeVector<TLAbsChat>(br);
 users = (TLVector<TLAbsUser>)ObjectUtils.DeserializeVector<TLAbsUser>(br);
-state = (Updates.TLState)ObjectUtils.DeserializeObject(br);
-
+state = (Updates.TLAbsState)ObjectUtils.DeserializeObject(br);
+Type = TLAbsPeerDialogsTypes.TLPeerDialogs;
         }
 
         public override void SerializeBody(BinaryWriter bw)

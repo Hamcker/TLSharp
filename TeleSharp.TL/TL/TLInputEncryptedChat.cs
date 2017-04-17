@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-247351839)]
-    public class TLInputEncryptedChat : TLObject
+    public class TLInputEncryptedChat : TLAbsInputEncryptedChat
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             chat_id = br.ReadInt32();
 access_hash = br.ReadInt64();
-
+Type = TLAbsInputEncryptedChatTypes.TLInputEncryptedChat;
         }
 
         public override void SerializeBody(BinaryWriter bw)

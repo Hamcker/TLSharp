@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1364105629)]
@@ -24,7 +27,7 @@ namespace TeleSharp.TL.Messages
         public TLAbsInputGeoPoint geo_point {get;set;}
         public string query {get;set;}
         public string offset {get;set;}
-        public Messages.TLBotResults Response{ get; set;}
+        public Messages.TLAbsBotResults Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -64,7 +67,7 @@ StringUtil.Serialize(offset,bw);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLBotResults)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsBotResults)ObjectUtils.DeserializeObject(br);
 
 		}
     }

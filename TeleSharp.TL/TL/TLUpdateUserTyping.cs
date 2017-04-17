@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1548249383)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             user_id = br.ReadInt32();
 action = (TLAbsSendMessageAction)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsUpdateTypes.TLUpdateUserTyping;
         }
 
         public override void SerializeBody(BinaryWriter bw)

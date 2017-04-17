@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1032140601)]
-    public class TLBotCommand : TLObject
+    public class TLBotCommand : TLAbsBotCommand
     {
         public override int Constructor
         {
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             command = StringUtil.Deserialize(br);
 description = StringUtil.Deserialize(br);
-
+Type = TLAbsBotCommandTypes.TLBotCommand;
         }
 
         public override void SerializeBody(BinaryWriter bw)

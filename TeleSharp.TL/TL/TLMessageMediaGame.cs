@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-38694904)]
@@ -18,7 +20,7 @@ namespace TeleSharp.TL
             }
         }
 
-             public TLGame game {get;set;}
+             public TLAbsGame game {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,8 +30,8 @@ namespace TeleSharp.TL
 
         public override void DeserializeBody(BinaryReader br)
         {
-            game = (TLGame)ObjectUtils.DeserializeObject(br);
-
+            game = (TLAbsGame)ObjectUtils.DeserializeObject(br);
+Type = TLAbsMessageMediaTypes.TLMessageMediaGame;
         }
 
         public override void SerializeBody(BinaryWriter bw)

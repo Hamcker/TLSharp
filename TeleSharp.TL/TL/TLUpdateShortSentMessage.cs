@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(301019932)]
@@ -55,7 +57,7 @@ entities = (TLVector<TLAbsMessageEntity>)ObjectUtils.DeserializeVector<TLAbsMess
 else
 entities = null;
 
-
+Type = TLAbsUpdatesTypes.TLUpdateShortSentMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

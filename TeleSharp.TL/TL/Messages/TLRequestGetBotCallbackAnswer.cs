@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(-2130010132)]
@@ -23,7 +26,7 @@ namespace TeleSharp.TL.Messages
         public TLAbsInputPeer peer {get;set;}
         public int msg_id {get;set;}
         public byte[] data {get;set;}
-        public Messages.TLBotCallbackAnswer Response{ get; set;}
+        public Messages.TLAbsBotCallbackAnswer Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -62,7 +65,7 @@ BytesUtil.Serialize(data,bw);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Messages.TLBotCallbackAnswer)ObjectUtils.DeserializeObject(br);
+			Response = (Messages.TLAbsBotCallbackAnswer)ObjectUtils.DeserializeObject(br);
 
 		}
     }

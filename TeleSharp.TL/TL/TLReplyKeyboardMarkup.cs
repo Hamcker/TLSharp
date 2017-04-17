@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(889353612)]
@@ -22,7 +24,7 @@ namespace TeleSharp.TL
      public bool resize {get;set;}
      public bool single_use {get;set;}
      public bool selective {get;set;}
-     public TLVector<TLKeyboardButtonRow> rows {get;set;}
+     public TLVector<TLAbsKeyboardButtonRow> rows {get;set;}
 
 
 		public void ComputeFlags()
@@ -40,8 +42,8 @@ flags = selective ? (flags | 4) : (flags & ~4);
 resize = (flags & 1) != 0;
 single_use = (flags & 2) != 0;
 selective = (flags & 4) != 0;
-rows = (TLVector<TLKeyboardButtonRow>)ObjectUtils.DeserializeVector<TLKeyboardButtonRow>(br);
-
+rows = (TLVector<TLAbsKeyboardButtonRow>)ObjectUtils.DeserializeVector<TLAbsKeyboardButtonRow>(br);
+Type = TLAbsReplyMarkupTypes.TLReplyKeyboardMarkup;
         }
 
         public override void SerializeBody(BinaryWriter bw)

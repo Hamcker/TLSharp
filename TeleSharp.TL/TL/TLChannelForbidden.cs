@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-2059962289)]
@@ -42,7 +44,7 @@ megagroup = (flags & 256) != 0;
 id = br.ReadInt32();
 access_hash = br.ReadInt64();
 title = StringUtil.Deserialize(br);
-
+Type = TLAbsChatTypes.TLChannelForbidden;
         }
 
         public override void SerializeBody(BinaryWriter bw)

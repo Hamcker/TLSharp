@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Channels
 {
 	[TLObject(-934882771)]
@@ -20,7 +23,7 @@ namespace TeleSharp.TL.Channels
 
                 public TLAbsInputChannel channel {get;set;}
         public int id {get;set;}
-        public TLExportedMessageLink Response{ get; set;}
+        public TLAbsExportedMessageLink Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -44,7 +47,7 @@ bw.Write(id);
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (TLExportedMessageLink)ObjectUtils.DeserializeObject(br);
+			Response = (TLAbsExportedMessageLink)ObjectUtils.DeserializeObject(br);
 
 		}
     }

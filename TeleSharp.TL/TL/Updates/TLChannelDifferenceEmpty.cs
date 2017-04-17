@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Updates
 {
 	[TLObject(1041346555)]
@@ -42,7 +44,7 @@ timeout = br.ReadInt32();
 else
 timeout = null;
 
-
+Type = TLAbsChannelDifferenceTypes.TLChannelDifferenceEmpty;
         }
 
         public override void SerializeBody(BinaryWriter bw)

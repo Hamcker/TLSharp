@@ -5,20 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Help
 {
-	[TLObject(1181279933)]
+	[TLObject(705920636)]
     public class TLAppChangelog : TLAbsAppChangelog
     {
         public override int Constructor
         {
             get
             {
-                return 1181279933;
+                return 705920636;
             }
         }
 
-             public string text {get;set;}
+             public string message {get;set;}
+     public TLAbsMessageMedia media {get;set;}
+     public TLVector<TLAbsMessageEntity> entities {get;set;}
 
 
 		public void ComputeFlags()
@@ -28,14 +32,18 @@ namespace TeleSharp.TL.Help
 
         public override void DeserializeBody(BinaryReader br)
         {
-            text = StringUtil.Deserialize(br);
-
+            message = StringUtil.Deserialize(br);
+media = (TLAbsMessageMedia)ObjectUtils.DeserializeObject(br);
+entities = (TLVector<TLAbsMessageEntity>)ObjectUtils.DeserializeVector<TLAbsMessageEntity>(br);
+Type = TLAbsAppChangelogTypes.TLAppChangelog;
         }
 
         public override void SerializeBody(BinaryWriter bw)
         {
 			bw.Write(Constructor);
-            StringUtil.Serialize(text,bw);
+            StringUtil.Serialize(message,bw);
+ObjectUtils.SerializeObject(media,bw);
+ObjectUtils.SerializeObject(entities,bw);
 
         }
     }

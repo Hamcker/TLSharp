@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Auth
 {
 	[TLObject(1319464594)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Auth
         }
 
                 public string code {get;set;}
-        public Auth.TLAuthorization Response{ get; set;}
+        public Auth.TLAbsAuthorization Response{ get; set;}
 
 
 		public void ComputeFlags()
@@ -41,7 +44,7 @@ namespace TeleSharp.TL.Auth
         }
 		public override void deserializeResponse(BinaryReader br)
 		{
-			Response = (Auth.TLAuthorization)ObjectUtils.DeserializeObject(br);
+			Response = (Auth.TLAbsAuthorization)ObjectUtils.DeserializeObject(br);
 
 		}
     }

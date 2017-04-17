@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(2079516406)]
-    public class TLAuthorization : TLObject
+    public class TLAuthorization : TLAbsAuthorization
     {
         public override int Constructor
         {
@@ -54,7 +56,7 @@ date_active = br.ReadInt32();
 ip = StringUtil.Deserialize(br);
 country = StringUtil.Deserialize(br);
 region = StringUtil.Deserialize(br);
-
+Type = TLAbsAuthorizationTypes.TLAuthorization;
         }
 
         public override void SerializeBody(BinaryWriter bw)

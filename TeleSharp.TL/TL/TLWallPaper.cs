@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-860866985)]
@@ -35,7 +37,7 @@ namespace TeleSharp.TL
 title = StringUtil.Deserialize(br);
 sizes = (TLVector<TLAbsPhotoSize>)ObjectUtils.DeserializeVector<TLAbsPhotoSize>(br);
 color = br.ReadInt32();
-
+Type = TLAbsWallPaperTypes.TLWallPaper;
         }
 
         public override void SerializeBody(BinaryWriter bw)

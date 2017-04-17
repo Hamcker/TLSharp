@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(1006044124)]
@@ -37,7 +39,7 @@ access_hash = br.ReadInt64();
 date = br.ReadInt32();
 admin_id = br.ReadInt32();
 participant_id = br.ReadInt32();
-
+Type = TLAbsEncryptedChatTypes.TLEncryptedChatWaiting;
         }
 
         public override void SerializeBody(BinaryWriter bw)

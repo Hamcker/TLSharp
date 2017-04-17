@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-299124375)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             peer = (TLAbsPeer)ObjectUtils.DeserializeObject(br);
 draft = (TLAbsDraftMessage)ObjectUtils.DeserializeObject(br);
-
+Type = TLAbsUpdateTypes.TLUpdateDraftMessage;
         }
 
         public override void SerializeBody(BinaryWriter bw)

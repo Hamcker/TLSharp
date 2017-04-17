@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Upload
 {
 	[TLObject(157948117)]
-    public class TLFile : TLObject
+    public class TLFile : TLAbsFile
     {
         public override int Constructor
         {
@@ -33,7 +35,7 @@ namespace TeleSharp.TL.Upload
             type = (Storage.TLAbsFileType)ObjectUtils.DeserializeObject(br);
 mtime = br.ReadInt32();
 bytes = BytesUtil.Deserialize(br);
-
+Type = TLAbsFileTypes.TLFile;
         }
 
         public override void SerializeBody(BinaryWriter bw)

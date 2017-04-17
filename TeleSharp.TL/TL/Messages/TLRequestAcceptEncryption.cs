@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1035731989)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Messages
             }
         }
 
-                public TLInputEncryptedChat peer {get;set;}
+                public TLAbsInputEncryptedChat peer {get;set;}
         public byte[] g_b {get;set;}
         public long key_fingerprint {get;set;}
         public TLAbsEncryptedChat Response{ get; set;}
@@ -31,7 +34,7 @@ namespace TeleSharp.TL.Messages
 
         public override void DeserializeBody(BinaryReader br)
         {
-            peer = (TLInputEncryptedChat)ObjectUtils.DeserializeObject(br);
+            peer = (TLAbsInputEncryptedChat)ObjectUtils.DeserializeObject(br);
 g_b = BytesUtil.Deserialize(br);
 key_fingerprint = br.ReadInt64();
 

@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(-1212732749)]
-    public class TLPasswordSettings : TLObject
+    public class TLPasswordSettings : TLAbsPasswordSettings
     {
         public override int Constructor
         {
@@ -29,7 +31,7 @@ namespace TeleSharp.TL.Account
         public override void DeserializeBody(BinaryReader br)
         {
             email = StringUtil.Deserialize(br);
-
+Type = TLAbsPasswordSettingsTypes.TLPasswordSettings;
         }
 
         public override void SerializeBody(BinaryWriter bw)

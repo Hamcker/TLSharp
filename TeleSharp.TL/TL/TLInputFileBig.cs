@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-95482955)]
@@ -33,7 +35,7 @@ namespace TeleSharp.TL
             id = br.ReadInt64();
 parts = br.ReadInt32();
 name = StringUtil.Deserialize(br);
-
+Type = TLAbsInputFileTypes.TLInputFileBig;
         }
 
         public override void SerializeBody(BinaryWriter bw)

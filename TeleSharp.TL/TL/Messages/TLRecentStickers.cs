@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL.Messages
 {
 	[TLObject(1558317424)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL.Messages
         {
             hash = br.ReadInt32();
 stickers = (TLVector<TLAbsDocument>)ObjectUtils.DeserializeVector<TLAbsDocument>(br);
-
+Type = TLAbsRecentStickersTypes.TLRecentStickers;
         }
 
         public override void SerializeBody(BinaryWriter bw)

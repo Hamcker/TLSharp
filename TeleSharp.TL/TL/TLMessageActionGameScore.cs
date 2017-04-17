@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(-1834538890)]
@@ -31,7 +33,7 @@ namespace TeleSharp.TL
         {
             game_id = br.ReadInt64();
 score = br.ReadInt32();
-
+Type = TLAbsMessageActionTypes.TLMessageActionGameScore;
         }
 
         public override void SerializeBody(BinaryWriter bw)

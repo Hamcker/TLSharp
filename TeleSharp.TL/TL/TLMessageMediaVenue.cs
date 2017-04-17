@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
 namespace TeleSharp.TL
 {
 	[TLObject(2031269663)]
@@ -37,7 +39,7 @@ title = StringUtil.Deserialize(br);
 address = StringUtil.Deserialize(br);
 provider = StringUtil.Deserialize(br);
 venue_id = StringUtil.Deserialize(br);
-
+Type = TLAbsMessageMediaTypes.TLMessageMediaVenue;
         }
 
         public override void SerializeBody(BinaryWriter bw)

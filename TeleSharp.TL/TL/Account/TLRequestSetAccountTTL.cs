@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(608323678)]
@@ -18,7 +21,7 @@ namespace TeleSharp.TL.Account
             }
         }
 
-                public TLAccountDaysTTL ttl {get;set;}
+                public TLAbsAccountDaysTTL ttl {get;set;}
         public bool Response{ get; set;}
 
 
@@ -29,7 +32,7 @@ namespace TeleSharp.TL.Account
 
         public override void DeserializeBody(BinaryReader br)
         {
-            ttl = (TLAccountDaysTTL)ObjectUtils.DeserializeObject(br);
+            ttl = (TLAbsAccountDaysTTL)ObjectUtils.DeserializeObject(br);
 
         }
 

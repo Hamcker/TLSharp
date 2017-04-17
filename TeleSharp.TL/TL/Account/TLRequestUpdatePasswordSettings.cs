@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using BigMath;
+
+
 namespace TeleSharp.TL.Account
 {
 	[TLObject(-92517498)]
@@ -19,7 +22,7 @@ namespace TeleSharp.TL.Account
         }
 
                 public byte[] current_password_hash {get;set;}
-        public Account.TLPasswordInputSettings new_settings {get;set;}
+        public Account.TLAbsPasswordInputSettings new_settings {get;set;}
         public bool Response{ get; set;}
 
 
@@ -31,7 +34,7 @@ namespace TeleSharp.TL.Account
         public override void DeserializeBody(BinaryReader br)
         {
             current_password_hash = BytesUtil.Deserialize(br);
-new_settings = (Account.TLPasswordInputSettings)ObjectUtils.DeserializeObject(br);
+new_settings = (Account.TLAbsPasswordInputSettings)ObjectUtils.DeserializeObject(br);
 
         }
 
