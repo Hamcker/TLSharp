@@ -76,8 +76,8 @@ namespace TLGenerator
             //remove comments and empty lines
             sourceLines = sourceLines.Where(x => !x.StartsWith("//") && !string.IsNullOrEmpty(x) && !string.IsNullOrWhiteSpace(x));
 
-            //remove semicolons
-            sourceLines = sourceLines.Select(x => x.Replace(";", "")).ToList();
+            //remove semicolons & Carriage Returns
+            sourceLines = sourceLines.Select(x => x.Replace(";", "").Replace("\r", "")).ToList();
 
             byte section = 1; // 1 types; 2 functions
             Models.Schema schema = new Models.Schema();
